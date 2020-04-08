@@ -34,23 +34,35 @@ class MyCylinder extends CGFobject {
      */
     initSideBuffers() {
         let angle = 0;
+        let textureCoord = 0;
+        let textureVariation = 1 / this.slices;
         
         //If 5 slices, 360/5 = 72 degrees variation for each vertice
         //this.angleVariation = 2 * Math.PI / this.slices;
         
-        this.vertices.push(Math.cos(angle), 0, -Math.sin(angle),
-                            Math.cos(angle), 2, -Math.sin(angle));
-            
+        this.vertices.push(Math.cos(angle), 0, -Math.sin(angle));
+        this.texCoords.push(textureCoord, 1);
+
+        this.vertices.push(Math.cos(angle), 1, -Math.sin(angle));
+        this.texCoords.push(textureCoord, 0);
+    
+
         this.normals.push(  Math.cos(angle), 0, -Math.sin(angle),
                             Math.cos(angle), 0, -Math.sin(angle));
         //TODO TEX COORDS
 
         angle += this.angleVariation;
+        textureCoord += textureVariation;
 
-        for (var i = 0; i < this.slices; i++) { // the first edge will be processed twice to apply textures
+        
+        for (var i = 0; i < this.slices; i++) {
             // makes an edge
-            this.vertices.push( Math.cos(angle), 0, -Math.sin(angle),
-                                Math.cos(angle), 2, -Math.sin(angle));
+            this.vertices.push(Math.cos(angle), 0, -Math.sin(angle));
+            this.texCoords.push(textureCoord, 1);
+
+            this.vertices.push(Math.cos(angle), 1, -Math.sin(angle));
+            this.texCoords.push(textureCoord, 0);
+    
 
             // makes the face immediately before the edge
             this.indices.push(  2 * i, 2 * i + 2, 2 * i + 3,
@@ -61,9 +73,10 @@ class MyCylinder extends CGFobject {
             this.normals.push(  Math.cos(angle), 0, -Math.sin(angle),
                                 Math.cos(angle), 0, -Math.sin(angle));
 
-           //TODO TEXTURE COORDS
+           
                             
             angle += this.angleVariation;
+            textureCoord += textureVariation;
         }
       
     }
