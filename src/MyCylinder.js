@@ -20,9 +20,9 @@ class MyCylinder extends CGFobject {
         this.normals = [];
         this.texCoords = [];
 
-        this.minAngle = 2 * Math.PI / this.slices;
+        this.angleVariation = 2 * Math.PI / this.slices;
         this.initSideBuffers();
-        this.initTopBottomBuffers();
+       
 
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
@@ -36,7 +36,7 @@ class MyCylinder extends CGFobject {
         let angle = 0;
         
         //If 5 slices, 360/5 = 72 degrees variation for each vertice
-        this.angleVariation = 2 * Math.PI / this.slices;
+        //this.angleVariation = 2 * Math.PI / this.slices;
         
         this.vertices.push(Math.cos(angle), 0, -Math.sin(angle),
                             Math.cos(angle), 2, -Math.sin(angle));
@@ -67,14 +67,38 @@ class MyCylinder extends CGFobject {
         }
       
     }
+
+    //Vertices list FOR A PENTAGON BASE
+    /*
+    i = 0
+    bottom vertice                                  0
+    top vertice vertically above the previous one   1
+
+    i= 1
+    bottom vertice                                  2
+    top vertice vertically above the previous one   3
+
+    i=2
+    bottom vertice                                  4
+    top vertice vertically above the previous one   5
+
+    i=3
+    bottom vertice                                  6
+    top vertice vertically above the previous one   7
+
+    i=4
+    bottom vertice                                  8
+    top vertice vertically above the previous one   9
+
+
+
+
+
+    */
     
 
     /**
      * Initialize the top and bottom faces
      */
-    initTopBottomBuffers() {
-        
-        
-
-    }
+    
 }

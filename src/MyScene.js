@@ -31,7 +31,7 @@ class MyScene extends CGFscene {
         this.displayAxis = true;
 
 
-        this.cylinder = new MyCylinder(this,4);
+        this.cylinder = new MyCylinder(this,5);
 
 
         this.displayCylinder = true;
