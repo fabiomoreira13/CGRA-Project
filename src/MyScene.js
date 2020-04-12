@@ -29,6 +29,7 @@ class MyScene extends CGFscene {
         //Objects connected to MyInterface
         this.cylinder = new MyCylinder(this,5);
         this.sphere = new MySphere(this, 50, 50);
+        this.cube = new MyCubeMap(this);
 
         //Material & Texture
         this.material = new CGFappearance(this);
@@ -39,6 +40,7 @@ class MyScene extends CGFscene {
         this.material.setTextureWrap('REPEAT','REPEAT');
         this.earth = new CGFtexture(this,'images/earth.jpg');
         this.material.setTexture(this.earth);
+
 
 
         this.displayAxis = true;
@@ -55,7 +57,7 @@ class MyScene extends CGFscene {
         this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
     }
     setDefaultAppearance() {
-        this.setAmbient(0.2, 0.4, 0.8, 1.0);
+        this.setAmbient(1.0, 1.0, 1.0, 1.0);
         this.setDiffuse(0.2, 0.4, 0.8, 1.0);
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
@@ -86,6 +88,9 @@ class MyScene extends CGFscene {
 
         //This sphere does not have defined texture coordinates
         //this.incompleteSphere.display();
+
+
+        this.cube.display();
 
         if (this.displayCylinder){
             this.cylinder.display();
