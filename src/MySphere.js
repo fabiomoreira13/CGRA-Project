@@ -30,6 +30,11 @@ class MySphere extends CGFobject {
     var thetaInc = (2 * Math.PI) / this.longDivs;
     var latVertices = this.longDivs + 1;
 
+    var texCoordLat = 0;
+    var texCoordLong = 0;
+    var deltaTexLat = 1 / this.latDivs;
+    var deltaTexLong = 1 / this.longDivs;
+
     // build an all-around stack at a time, starting on "north pole" and proceeding "south"
     for (let latitude = 0; latitude <= this.latDivs; latitude++) {
       var sinPhi = Math.sin(phi);
@@ -37,6 +42,7 @@ class MySphere extends CGFobject {
 
       // in each stack, build all the slices around, starting on longitude 0
       theta = 0;
+      texCoordLong = 0;
       for (let longitude = 0; longitude <= this.longDivs; longitude++) {
         //--- Vertices coordinates
         var x = Math.cos(theta) * sinPhi;
@@ -51,25 +57,29 @@ class MySphere extends CGFobject {
           // pushing two triangles using indices from this round (current, current+1)
           // and the ones directly south (next, next+1)
           // (i.e. one full round of slices ahead)
-          
+
           this.indices.push( current + 1, current, next);
           this.indices.push( current + 1, next, next +1);
         }
 
         //--- Normals
-        // at each vertex, the direction of the normal is equal to 
+        // at each vertex, the direction of the normal is equal to
         // the vector from the center of the sphere to the vertex.
         // in a sphere of radius equal to one, the vector length is one.
         // therefore, the value of the normal is equal to the position vectro
         this.normals.push(x, y, z);
-        theta += thetaInc;
 
         //--- Texture Coordinates
-        // To be done... 
+        this.texCoords.push(texCoordLong, texCoordLat);
+        // To be done...
         // May need some additional code also in the beginning of the function.
-        
+
+        theta += thetaInc;
+        texCoordLong += deltaTexLong;
+
       }
       phi += phiInc;
+      texCoordLat += deltaTexLat;
     }
 
 

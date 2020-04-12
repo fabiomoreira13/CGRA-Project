@@ -20,21 +20,30 @@ class MyScene extends CGFscene {
         this.gl.depthFunc(this.gl.LEQUAL);
 
         this.setUpdatePeriod(50);
-        
+
         this.enableTextures(true);
 
         //Initialize scene objects
         this.axis = new CGFaxis(this);
-        this.incompleteSphere = new MySphere(this, 16, 8);
 
         //Objects connected to MyInterface
-        this.displayAxis = true;
-
-
         this.cylinder = new MyCylinder(this,5);
+        this.sphere = new MySphere(this, 50, 50);
+
+        //Material & Texture
+        this.material = new CGFappearance(this);
+        this.material.setAmbient(0.5,0.5,0.5,1);
+        this.material.setDiffuse(0.7,0.7,0.7,1);
+        this.material.setShininess(10);
+        this.material.loadTexture('images/earth.jpg');
+        this.material.setTextureWrap('REPEAT','REPEAT');
+        this.earth = new CGFtexture(this,'images/earth.jpg');
+        this.material.setTexture(this.earth);
 
 
+        this.displayAxis = true;
         this.displayCylinder = true;
+        this.displaySphere = true;
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -66,7 +75,7 @@ class MyScene extends CGFscene {
         this.loadIdentity();
         // Apply transformations corresponding to the camera position relative to the origin
         this.applyViewMatrix();
-        
+
         // Draw axis
         if (this.displayAxis)
             this.axis.display();
@@ -80,6 +89,11 @@ class MyScene extends CGFscene {
 
         if (this.displayCylinder){
             this.cylinder.display();
+        }
+
+        if (this.displaySphere){
+          this.material.apply();
+          this.sphere.display();
         }
 
         // ---- END Primitive drawing section
