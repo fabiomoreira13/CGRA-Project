@@ -1,9 +1,14 @@
 class MyVehicle extends CGFobject {
-	constructor(scene, coords) {
+	constructor(scene, coords, angle, speed, x, y, z) {
 		super(scene);
 		this.initBuffers();
 		if (coords != undefined)
 			this.updateTexCoords(coords);
+		this.initialAngle = angle;
+		this.speed = speed;
+		this.x = x;
+		this.y = y;
+		this.z = z;
 	}
 
 	initBuffers() {
@@ -36,6 +41,9 @@ class MyVehicle extends CGFobject {
 
 
 		this.primitiveType = this.scene.gl.TRIANGLES;
+
+		
+	
 		this.initGLBuffers();
 	}
 
