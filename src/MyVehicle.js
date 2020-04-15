@@ -5,12 +5,32 @@ class MyVehicle extends CGFobject {
 		if (coords != undefined)
 			this.updateTexCoords(coords);
 		this.initialAngle = angle;
-		this.speed = speed;
+		this.speed = 0;
 		this.x = x;
 		this.y = y;
 		this.z = z;
 	}
 
+	update(){
+		this.x += this.speed * 0.1;
+		this.z += this.speed * 0.1;
+	}
+
+	turn(val){
+		this.initialAngle += val;
+	}
+
+	accelerate(val){
+		this.speed += val;
+	}
+
+	reset(){
+		this.x = 0;
+		this.y = 0;
+		this.z = 0;
+		this.speed = 0;
+		this.initialAngle = 0;
+	}
 	initBuffers() {
 		this.vertices = [
 			0, 0, 0.5,	//0
