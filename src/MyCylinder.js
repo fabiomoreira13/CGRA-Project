@@ -49,7 +49,9 @@ class MyCylinder extends CGFobject {
 
         this.normals.push(  Math.cos(angle), 0, -Math.sin(angle),
                             Math.cos(angle), 0, -Math.sin(angle));
-        //TODO TEX COORDS
+        
+
+        
 
         angle += this.angleVariation;
         textureCoord += textureVariation;
@@ -110,8 +112,6 @@ class MyCylinder extends CGFobject {
     */
     
 
-    /**
-     * Initialize the top and bottom faces
-     */
+  
     
 }
