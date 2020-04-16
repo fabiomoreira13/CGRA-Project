@@ -47,10 +47,10 @@ class MyScene extends CGFscene {
 
         //Display vars
         this.displayAxis = true;
-        this.displayCylinder = true;
-        this.displaySphere = true;
-        this.displayVehicle = true;
-        this.displayCube = false;
+        this.displayCylinder = false;
+        this.displaySphere = false;
+        this.displayVehicle = false;
+        this.displayCube = true;
 
 
         this.scaleFactor = 1;
@@ -81,12 +81,12 @@ class MyScene extends CGFscene {
             text+=" W ";
             this.vehicle.accelerate(this.speedFactor * 0.1);
             keysPressed=true;
-            this.vehicle.update();
+            //this.vehicle.update();
         }
         if (this.gui.isKeyPressed("KeyS")) {
             text+=" S ";
             this.vehicle.accelerate(this.speedFactor *  -0.1);
-            this.vehicle.update();
+            //this.vehicle.update();
             keysPressed=true;
         }
 
@@ -122,6 +122,7 @@ class MyScene extends CGFscene {
     // called periodically (as per setUpdatePeriod() in init())
     update(t){
         this.checkKeys();
+        this.vehicle.update();
     }
 
 
@@ -154,7 +155,7 @@ class MyScene extends CGFscene {
         //this.cube.display();
 
         if (this.displayCylinder){
-          
+            //this.material.apply();
             this.cylinder.display();
         }
 

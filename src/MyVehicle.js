@@ -29,7 +29,7 @@ class MyVehicle extends CGFobject {
 
 	accelerate(val){
 		//TODO Check if this is += val, so there is slowing down and gradually speeding up, of it's always the same speed.
-		this.speed = val;
+		this.speed += val;
 	}
 
 	reset(){
