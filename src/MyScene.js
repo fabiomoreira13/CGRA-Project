@@ -30,7 +30,7 @@ class MyScene extends CGFscene {
         this.cylinder = new MyCylinder(this,50);
         this.sphere = new MySphere(this, 50, 50);
         this.cube = new MyCubeMap(this);
-        this.vehicle = new MyVehicle(this, undefined, 0, 1, 1,0,2);
+        this.vehicle = new MyVehicle(this, undefined, 0, 0, 1,0,2);
         this.quad = new MyQuad(this);
 
         //Material & Texture
@@ -50,6 +50,10 @@ class MyScene extends CGFscene {
         this.displayCylinder = true;
         this.displaySphere = true;
         this.displayVehicle = true;
+
+
+        this.scaleFactor = 1;
+        this.speedFactor = 1;
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -74,13 +78,13 @@ class MyScene extends CGFscene {
         // Check for key codes e.g. in https://keycode.info/
         if (this.gui.isKeyPressed("KeyW")) {
             text+=" W ";
-            this.vehicle.accelerate(0.1);
+            this.vehicle.accelerate(this.speedFactor * 0.1);
             keysPressed=true;
             this.vehicle.update();
         }
         if (this.gui.isKeyPressed("KeyS")) {
             text+=" S ";
-            this.vehicle.accelerate(-0.1);
+            this.vehicle.accelerate(this.speedFactor *  -0.1);
             this.vehicle.update();
             keysPressed=true;
         }
@@ -161,8 +165,10 @@ class MyScene extends CGFscene {
 
         if (this.displayVehicle){
             this.pushMatrix();
+            
             this.translate(this.vehicle.x, this.vehicle.y, this.vehicle.z);
-		    this.rotate(this.vehicle.initialAngle * Math.PI / 180 , 0,1,0);
+            this.rotate(this.vehicle.initialAngle * Math.PI / 180 , 0,1,0);
+            this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
             this.vehicle.display();
 
             this.popMatrix();

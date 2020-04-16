@@ -12,8 +12,9 @@ class MyVehicle extends CGFobject {
 	}
 
 	update(){
-		this.x += this.speed * 0.1;
-		this.z += this.speed * 0.1;
+		this.x +=  this.speed * Math.sin(this.initialAngle * Math.PI / 180);
+		//console.log(this.x);
+		this.z += this.speed * Math.cos(this.initialAngle * Math.PI / 180);
 	}
 
 	turn(val){
@@ -27,7 +28,8 @@ class MyVehicle extends CGFobject {
 	}
 
 	accelerate(val){
-		this.speed += val;
+		//TODO Check if this is += val, so there is slowing down and gradually speeding up, of it's always the same speed.
+		this.speed = val;
 	}
 
 	reset(){
