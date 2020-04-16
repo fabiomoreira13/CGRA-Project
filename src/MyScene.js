@@ -50,6 +50,7 @@ class MyScene extends CGFscene {
         this.displayCylinder = true;
         this.displaySphere = true;
         this.displayVehicle = true;
+        this.displayCube = false;
 
 
         this.scaleFactor = 1;
@@ -172,6 +173,10 @@ class MyScene extends CGFscene {
             this.vehicle.display();
 
             this.popMatrix();
+        }
+
+        if (this.displayCube){
+            this.cube.display();
         }
 
         // ---- END Primitive drawing section
