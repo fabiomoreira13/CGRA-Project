@@ -54,8 +54,10 @@ class MyVehicle extends CGFobject {
 			0, 4, 2,
 			0, 1, 3,
 			0, 3, 4,
-			1, 2, 3,
-			2, 4, 3
+
+			//base
+			1, 2, 4,
+			4, 3, 1
 		];
 
 		//Facing Z positive
