@@ -76,17 +76,19 @@ class MyScene extends CGFscene {
             text+=" W ";
             this.vehicle.accelerate(0.1);
             keysPressed=true;
+            this.vehicle.update();
         }
         if (this.gui.isKeyPressed("KeyS")) {
             text+=" S ";
             this.vehicle.accelerate(-0.1);
+            this.vehicle.update();
             keysPressed=true;
         }
 
-        //check if rotation works fine since he must rotate over itself
+        
         if (this.gui.isKeyPressed("KeyA")){
             text+=" A ";
-            this.vehicle.turn(15);
+            this.vehicle.turn(15 );
             keysPressed = true;
 
         }
@@ -106,7 +108,7 @@ class MyScene extends CGFscene {
     
         if (keysPressed){
             console.log(text);
-            this.vehicle.update();
+            //this.vehicle.update();
         }
     }
         
@@ -160,7 +162,7 @@ class MyScene extends CGFscene {
         if (this.displayVehicle){
             this.pushMatrix();
             this.translate(this.vehicle.x, this.vehicle.y, this.vehicle.z);
-		    this.rotate(this.vehicle.initialAngle , 0,1,0);
+		    this.rotate(this.vehicle.initialAngle * Math.PI / 180 , 0,1,0);
             this.vehicle.display();
 
             this.popMatrix();

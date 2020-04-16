@@ -17,7 +17,13 @@ class MyVehicle extends CGFobject {
 	}
 
 	turn(val){
+		let old_x = this.x; let old_y = this.y;
+		this.x = 0;
+		this.y = 0;
 		this.initialAngle += val;
+
+		this.x = old_x;
+		this.y = old_y;
 	}
 
 	accelerate(val){
