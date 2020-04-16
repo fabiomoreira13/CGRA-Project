@@ -27,10 +27,10 @@ class MyScene extends CGFscene {
         this.axis = new CGFaxis(this);
 
         //Objects connected to MyInterface
-        this.cylinder = new MyCylinder(this,5);
+        this.cylinder = new MyCylinder(this,50);
         this.sphere = new MySphere(this, 50, 50);
         this.cube = new MyCubeMap(this);
-        this.vehicle = new MyVehicle(this);
+        this.vehicle = new MyVehicle(this, undefined, 0, 0, 1,0,2);
         this.quad = new MyQuad(this);
 
         //Material & Texture
@@ -45,10 +45,16 @@ class MyScene extends CGFscene {
 
 
 
+        //Display vars
         this.displayAxis = true;
         this.displayCylinder = true;
         this.displaySphere = true;
         this.displayVehicle = true;
+        this.displayCube = false;
+
+
+        this.scaleFactor = 1;
+        this.speedFactor = 1;
     }
     initLights() {
         this.lights[0].setPosition(15, 2, 5, 1);
@@ -65,10 +71,62 @@ class MyScene extends CGFscene {
         this.setSpecular(0.2, 0.4, 0.8, 1.0);
         this.setShininess(10.0);
     }
+
+
+    checkKeys() {
+        var text="Keys pressed: ";
+        var keysPressed=false;
+        // Check for key codes e.g. in https://keycode.info/
+        if (this.gui.isKeyPressed("KeyW")) {
+            text+=" W ";
+            this.vehicle.accelerate(this.speedFactor * 0.1);
+            keysPressed=true;
+            this.vehicle.update();
+        }
+        if (this.gui.isKeyPressed("KeyS")) {
+            text+=" S ";
+            this.vehicle.accelerate(this.speedFactor *  -0.1);
+            this.vehicle.update();
+            keysPressed=true;
+        }
+
+        
+        if (this.gui.isKeyPressed("KeyA")){
+            text+=" A ";
+            this.vehicle.turn(15 );
+            keysPressed = true;
+
+        }
+
+        if (this.gui.isKeyPressed("KeyD")){
+            text+=" D ";
+            this.vehicle.turn(-15);
+            keysPressed = true;
+
+        }
+
+        if (this.gui.isKeyPressed("KeyR")){
+            text+=" R ";
+            this.vehicle.reset();
+            keysPressed = true;
+        }
+    
+        if (keysPressed){
+            console.log(text);
+            //this.vehicle.update();
+        }
+    }
+        
+
+
     // called periodically (as per setUpdatePeriod() in init())
     update(t){
-        //To be done...
+        this.checkKeys();
     }
+
+
+
+
 
     display() {
         // ---- BEGIN Background, camera and axis setup
@@ -96,6 +154,7 @@ class MyScene extends CGFscene {
         //this.cube.display();
 
         if (this.displayCylinder){
+          
             this.cylinder.display();
         }
 
@@ -103,8 +162,21 @@ class MyScene extends CGFscene {
           this.material.apply();
           this.sphere.display();
         }
+
+
         if (this.displayVehicle){
-        this.vehicle.display();
+            this.pushMatrix();
+            
+            this.translate(this.vehicle.x, this.vehicle.y, this.vehicle.z);
+            this.rotate(this.vehicle.initialAngle * Math.PI / 180 , 0,1,0);
+            this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
+            this.vehicle.display();
+
+            this.popMatrix();
+        }
+
+        if (this.displayCube){
+            this.cube.display();
         }
 
         // ---- END Primitive drawing section

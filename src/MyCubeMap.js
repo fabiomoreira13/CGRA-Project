@@ -22,8 +22,8 @@ class MyCubeMap extends CGFobject {
 		this.material.setTextureWrap('REPEAT', 'REPEAT');
 
 		this.top.texCoords = [
-			0.25, 0.33,
-			0.5, 0.33,
+			0.25, 1/3,
+			0.5, 1/3,
 			0.25, 0,
 			0.5, 0
 		];
@@ -32,40 +32,40 @@ class MyCubeMap extends CGFobject {
 		this.bottom.texCoords = [
 			0.25, 1,
 			0.5, 1,
-			0.25, 0.66,
-			0.5, 0.66
+			0.25, 2/3,
+			0.5, 2/3
 		];
 		this.bottom.updateTexCoordsGLBuffers();
 
 		this.left.texCoords = [
-			0, 0.66,
-			0.25, 0.66,
-			0, 0.33,
-			0.25, 0.33
+			0, 2/3,
+			0.25, 2/3,
+			0, 1/3,
+			0.25, 1/3
 		];
 		this.left.updateTexCoordsGLBuffers();
 
 		this.right.texCoords = [
-			0.5, 0.66,
-			0.75, 0.66,
-			0.5, 0.33,
-			0.75, 0.33
+			0.5, 2/3,
+			0.75, 2/3,
+			0.5, 1/3,
+			0.75, 1/3
 		];
 		this.right.updateTexCoordsGLBuffers();
 
 		this.front.texCoords = [
-			0.75, 0.66,
-			1, 0.66,
-			0.75, 0.33,
-			1, 0.33
+			0.25, 2/3,
+			0.5, 2/3,
+			0.25, 1/3,
+			0.5, 1/3
 		];
 		this.front.updateTexCoordsGLBuffers();
 
 		this.back.texCoords = [
-			0.25, 0.66,
-			0.5, 0.66,
-			0.25, 0.33,
-			0.5, 0.33
+			0.75, 2/3,
+			1, 2/3,
+			0.75, 1/3,
+			1, 1/3
 		];
 		this.back.updateTexCoordsGLBuffers();
 	}
@@ -77,42 +77,41 @@ class MyCubeMap extends CGFobject {
 		// TOP //
 		this.scene.pushMatrix();
 		this.scene.translate(0, 25, 0);
-    this.scene.rotate(-Math.PI / 2, 1, 0, 0);
+    this.scene.rotate(Math.PI / 2, 1, 0, 0);
 		this.top.display();
 		this.scene.popMatrix();
 
 		// BOTTOM //
 		this.scene.pushMatrix();
 		this.scene.translate(0, -25, 0);
-    this.scene.rotate(Math.PI / 2, 1, 0, 0);
+    this.scene.rotate(-Math.PI / 2, 1, 0, 0);
 		this.bottom.display();
 		this.scene.popMatrix();
 
 		// LEFT //
 		this.scene.pushMatrix();
 		this.scene.translate(-25, 0, 0);
-    this.scene.rotate(-Math.PI / 2, 0, 1, 0);
+    this.scene.rotate(Math.PI / 2, 0, 1, 0);
 		this.left.display();
 		this.scene.popMatrix();
 
 		// RIGHT //
 		this.scene.pushMatrix();
 		this.scene.translate(25, 0, 0);
-    this.scene.rotate(Math.PI / 2, 0, 1, 0);
+    this.scene.rotate(-Math.PI / 2, 0, 1, 0);
 		this.right.display();
 		this.scene.popMatrix();
 
 		// FRONT //
 		this.scene.pushMatrix();
-		this.scene.translate(0,0,25);
+		this.scene.translate(0, 0, -25);
 		this.front.display();
 		this.scene.popMatrix();
 
 		// BACK //
 		this.scene.pushMatrix();
-		this.scene.translate(25, -25, -25);
+		this.scene.translate(0,0,25);
 		this.scene.rotate(Math.PI, 0, 1, 0);
-		this.scene.translate(25, 25, 0);
 		this.back.display();
 		this.scene.popMatrix();
 	}
