@@ -18,6 +18,9 @@ class MyVehicle extends CGFobject {
 		this.body = new MySphere(this.scene, 50, 50);
 		this.bottom = new MySphere(this.scene, 50, 50);
 		this.motor = new MySphere(this.scene, 50, 50);
+
+		this.helix1 = new MyHelix(this.scene);
+		this.helix2 = new MyHelix(this.scene);
 		
 
 		this.initMaterials(this.scene);
@@ -31,6 +34,8 @@ class MyVehicle extends CGFobject {
 		this.x +=  this.speed * Math.sin(this.initialAngle * Math.PI / 180);
 		//console.log(this.x);
 		this.z += this.speed * Math.cos(this.initialAngle * Math.PI / 180);
+		
+		
 	}
 
 	turn(val){
@@ -98,6 +103,24 @@ class MyVehicle extends CGFobject {
 		this.scene.translate(-0.13, -1.1, -0.75);
 		this.scene.scale(0.05,0.05, 0.1);
 		this.motor.display();
+		this.scene.popMatrix();
+
+		//Helix 1
+		this.scene.pushMatrix();
+		this.scene.translate(0.13,-1.1,-0.85 );
+		//this.scene.translate(-this.x, -this.y, -this.z);
+		this.scene.scale(-0.05,-0.05,-1);
+		//this.scene.scale(0.05,0.05, 1);
+		this.helix1.display();
+		this.scene.popMatrix();
+		
+		//Helix 2
+		this.scene.pushMatrix();
+		this.scene.translate(-0.13,-1.1,-0.85 );
+		//this.scene.translate(-this.x, -this.y, -this.z);
+		this.scene.scale(-0.05,-0.05,-1);
+		//this.scene.scale(0.05,0.05, 1);
+		this.helix2.display();
 		this.scene.popMatrix();
 
 		

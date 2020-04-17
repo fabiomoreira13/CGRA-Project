@@ -30,10 +30,12 @@ class MyScene extends CGFscene {
         this.cylinder = new MyCylinder(this,50);
         this.sphere = new MySphere(this, 50, 50);
         this.cube = new MyCubeMap(this);
-        this.vehicle = new MyVehicle(this, undefined, 0, 0, 1,0,2);
+        this.vehicle = new MyVehicle(this, undefined, 0, 0, 5,0,5);
         this.quad = new MyQuad(this);
 
-      
+        
+
+
         //Material & Texture
         this.material = new CGFappearance(this);
         this.material.setAmbient(0.5,0.5,0.5,1);
@@ -50,8 +52,8 @@ class MyScene extends CGFscene {
         this.displayAxis = true;
         this.displayCylinder = false;
         this.displaySphere = false;
-        this.displayVehicle = false;
-        this.displayCube = true;
+        this.displayVehicle = true;
+        this.displayCube = false;
 
 
         this.scaleFactor = 1;
@@ -179,7 +181,9 @@ class MyScene extends CGFscene {
             this.translate(this.vehicle.x, this.vehicle.y, this.vehicle.z);
             this.rotate(this.vehicle.initialAngle * Math.PI / 180 , 0,1,0);
             this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
+            
             this.vehicle.display();
+            
 
             this.popMatrix();
         }
@@ -188,7 +192,10 @@ class MyScene extends CGFscene {
             this.cube.display();
         }
 
-      
+        
+        
+
+        
         // ---- END Primitive drawing section
     }
 }
