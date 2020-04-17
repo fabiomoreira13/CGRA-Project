@@ -131,6 +131,7 @@ class MyScene extends CGFscene {
     update(t){
         this.checkKeys();
         this.vehicle.update();
+      
         
     }
 
@@ -182,10 +183,13 @@ class MyScene extends CGFscene {
             this.rotate(this.vehicle.initialAngle * Math.PI / 180 , 0,1,0);
             this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
             
+            
+            
             this.vehicle.display();
             
 
             this.popMatrix();
+
         }
 
         if (this.displayCube){

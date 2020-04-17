@@ -36,6 +36,7 @@ class MyVehicle extends CGFobject {
 		this.z += this.speed * Math.cos(this.initialAngle * Math.PI / 180);
 		
 		
+		
 	}
 
 	turn(val){
@@ -74,6 +75,8 @@ class MyVehicle extends CGFobject {
 		
 		
 	}
+
+	
 	display(){
 
 		//Body
