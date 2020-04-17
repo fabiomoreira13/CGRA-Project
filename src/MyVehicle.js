@@ -1,3 +1,8 @@
+/**
+ * MyVehicle
+ * @constructor
+ * @param scene - Reference to MyScene object
+ */
 class MyVehicle extends CGFobject {
 	constructor(scene, coords, angle, speed, x, y, z) {
 		super(scene);
@@ -9,7 +14,18 @@ class MyVehicle extends CGFobject {
 		this.x = x;
 		this.y = y;
 		this.z = z;
+
+		this.body = new MySphere(this.scene, 50, 50);
+		this.bottom = new MySphere(this.scene, 50, 50);
+		this.motor = new MySphere(this.scene, 50, 50);
+		
+
+		this.initMaterials(this.scene);
 	}
+	enableNormalViz() {
+		this.body.enableNormalViz();
+	};
+
 
 	update(){
 		this.x +=  this.speed * Math.sin(this.initialAngle * Math.PI / 180);
@@ -28,7 +44,7 @@ class MyVehicle extends CGFobject {
 	}
 
 	accelerate(val){
-		//TODO Check if this is += val, so there is slowing down and gradually speeding up, of it's always the same speed.
+		
 		this.speed += val;
 	}
 
@@ -39,49 +55,62 @@ class MyVehicle extends CGFobject {
 		this.speed = 0;
 		this.initialAngle = 0;
 	}
-	initBuffers() {
-		this.vertices = [
-			0, 0, 0.5,	//0
-			0.5, -0.5, -0.5,	//1
-			-0.5, -0.5, -0.5,	//2
-			0.5, 0.5, -0.5,	//3
-			-0.5, 0.5, -0.5	//4
-		];
 
-		//Counter-clockwise reference of vertices
-		this.indices = [
-			0, 2, 1,
-			0, 4, 2,
-			0, 1, 3,
-			0, 3, 4,
-
-			//base
-			1, 2, 4,
-			4, 3, 1
-		];
-
-		//Facing Z positive
-		this.normals = [
-			0, 0, 1,
-			0, 0, 1,
-			0, 0, 1,
-			0, 0, 1,
-			0, 0, 1
-		];
-
-
-		this.primitiveType = this.scene.gl.TRIANGLES;
+	initMaterials(scene){
+		this.materialTangram = new CGFappearance(this.scene);
+        this.materialTangram.setAmbient(0.1, 0.1, 0.1, 1);
+        this.materialTangram.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.materialTangram.setSpecular(0.1, 0.1, 0.1, 1);
+        this.materialTangram.setShininess(10.0);
+        this.texture = new CGFtexture(this.scene, 'images/earth.jpg');
+        this.materialTangram.setTexture(this.texture);
+        this.materialTangram.setTextureWrap('REPEAT', 'REPEAT');
 
 		
-	
-		this.initGLBuffers();
+		
+	}
+	display(){
+
+		//Body
+		this.scene.pushMatrix();
+		this.scene.scale(1,1,2);
+		
+		this.materialTangram.apply();
+		this.body.display();
+		this.scene.popMatrix();
+
+		//Bottom
+		this.scene.pushMatrix();
+		this.scene.translate(0,-1.1,0);
+		this.scene.scale(0.2,0.2, 0.8);
+		this.bottom.display()
+		this.scene.popMatrix();
+
+		//Motor1
+		this.scene.pushMatrix();
+		this.scene.translate(0.15, -1.1, -0.75);
+		this.scene.scale(0.05,0.05, 0.1);
+		this.motor.display();
+		this.scene.popMatrix();
+
+		//Motor2
+		this.scene.pushMatrix();
+		this.scene.translate(-0.15, -1.1, -0.75);
+		this.scene.scale(0.05,0.05, 0.1);
+		this.motor.display();
+		this.scene.popMatrix();
+
+		
 	}
 
-	/**
-	 * @method updateTexCoords
-	 * Updates the list of texture coordinates of the quad
-	 * @param {Array} coords - Array of texture coordinates
-	 */
+	updateBuffers(){
+	}
+
+	disableNormalViz() {
+		this.body.disableNormalViz();
+	}
+
+	
 	updateTexCoords(coords) {
 		this.texCoords = [...coords];
 		this.updateTexCoordsGLBuffers();

@@ -33,6 +33,7 @@ class MyScene extends CGFscene {
         this.vehicle = new MyVehicle(this, undefined, 0, 0, 1,0,2);
         this.quad = new MyQuad(this);
 
+      
         //Material & Texture
         this.material = new CGFappearance(this);
         this.material.setAmbient(0.5,0.5,0.5,1);
@@ -80,12 +81,14 @@ class MyScene extends CGFscene {
         if (this.gui.isKeyPressed("KeyW")) {
             text+=" W ";
             this.vehicle.accelerate(this.speedFactor * 0.1);
+            
             keysPressed=true;
             //this.vehicle.update();
         }
         if (this.gui.isKeyPressed("KeyS")) {
             text+=" S ";
             this.vehicle.accelerate(this.speedFactor *  -0.1);
+            
             //this.vehicle.update();
             keysPressed=true;
         }
@@ -94,6 +97,7 @@ class MyScene extends CGFscene {
         if (this.gui.isKeyPressed("KeyA")){
             text+=" A ";
             this.vehicle.turn(15 );
+        
             keysPressed = true;
 
         }
@@ -101,6 +105,7 @@ class MyScene extends CGFscene {
         if (this.gui.isKeyPressed("KeyD")){
             text+=" D ";
             this.vehicle.turn(-15);
+           
             keysPressed = true;
 
         }
@@ -108,6 +113,7 @@ class MyScene extends CGFscene {
         if (this.gui.isKeyPressed("KeyR")){
             text+=" R ";
             this.vehicle.reset();
+
             keysPressed = true;
         }
     
@@ -123,6 +129,7 @@ class MyScene extends CGFscene {
     update(t){
         this.checkKeys();
         this.vehicle.update();
+        
     }
 
 
@@ -161,6 +168,7 @@ class MyScene extends CGFscene {
 
         if (this.displaySphere){
           this.material.apply();
+          
           this.sphere.display();
         }
 
@@ -180,6 +188,7 @@ class MyScene extends CGFscene {
             this.cube.display();
         }
 
+      
         // ---- END Primitive drawing section
     }
 }
