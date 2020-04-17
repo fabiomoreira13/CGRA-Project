@@ -88,14 +88,14 @@ class MyVehicle extends CGFobject {
 
 		//Motor1
 		this.scene.pushMatrix();
-		this.scene.translate(0.15, -1.1, -0.75);
+		this.scene.translate(0.13, -1.1, -0.75);
 		this.scene.scale(0.05,0.05, 0.1);
 		this.motor.display();
 		this.scene.popMatrix();
 
 		//Motor2
 		this.scene.pushMatrix();
-		this.scene.translate(-0.15, -1.1, -0.75);
+		this.scene.translate(-0.13, -1.1, -0.75);
 		this.scene.scale(0.05,0.05, 0.1);
 		this.motor.display();
 		this.scene.popMatrix();
