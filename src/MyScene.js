@@ -111,8 +111,10 @@ class MyScene extends CGFscene {
 
         if (this.gui.isKeyPressed("KeyP")) {
             text+=" P ";
-        
-            this.vehicle.enableAutoPilot();
+            if (this.vehicle.autoPilotEnabled == false)  
+                this.vehicle.enableAutoPilot();
+            else 
+                this.vehicle.autoPilotEnabled = false;
             
             //this.vehicle.update();
             //keysPressed=true;
@@ -241,6 +243,8 @@ class MyScene extends CGFscene {
         }
 
         
+
+        //TODO DELETE THIS WHEN AUTO PILOT IS WORKING FINE. THIS IS HERE TO CHECK DIAMETER OF THE CURVE
         this.pushMatrix();
         this.translate(10,0,0);
         this.rotate(Math.PI/2, 0,1,0);

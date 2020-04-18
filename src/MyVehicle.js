@@ -107,7 +107,7 @@ class MyVehicle extends CGFobject {
 
 	enableAutoPilot(){
 		this.autoPilotEnabled = true;
-		this.speed = this.scene.speedFactor * 0.1 * 5;
+		this.speed = 0.5;
 		this.center_x = this.x + 5 * Math.cos(this.initialAngle);
 		this.center_z = this.z - 5 * Math.sin(this.initialAngle);
 	}
@@ -126,6 +126,8 @@ class MyVehicle extends CGFobject {
 		this.x +=  this.speed * Math.sin(this.initialAngle * Math.PI / 180);
 		//console.log(this.x);
 		this.z += this.speed * Math.cos(this.initialAngle * Math.PI / 180);
+
+		this.helixAngle += this.speed * 3 * 15 * Math.PI / 180;
 	}
 	
 	display(){
