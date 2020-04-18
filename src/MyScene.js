@@ -35,7 +35,7 @@ class MyScene extends CGFscene {
 
         
 
-
+        this.deleteLater = new MyLeme(this);
         //Material & Texture
         this.material = new CGFappearance(this);
         this.material.setAmbient(0.5,0.5,0.5,1);
@@ -93,24 +93,35 @@ class MyScene extends CGFscene {
         // Check for key codes e.g. in https://keycode.info/
         if (this.gui.isKeyPressed("KeyW")) {
             text+=" W ";
-            this.vehicle.accelerate(this.speedFactor * 0.1);
+            if (this.vehicle.autoPilotEnabled == false)            
+                this.vehicle.accelerate(this.speedFactor * 0.1);
+
             
             //keysPressed=true;
             //this.vehicle.update();
         }
         if (this.gui.isKeyPressed("KeyS")) {
             text+=" S ";
-            this.vehicle.accelerate(this.speedFactor *  -0.1);
+            if (this.vehicle.autoPilotEnabled == false)  
+                this.vehicle.accelerate(this.speedFactor *  -0.1);
             
             //this.vehicle.update();
             //keysPressed=true;
         }
 
+        if (this.gui.isKeyPressed("KeyP")) {
+            text+=" P ";
+        
+            this.vehicle.enableAutoPilot();
+            
+            //this.vehicle.update();
+            //keysPressed=true;
+        }
         
         if (this.gui.isKeyPressed("KeyA")){
             text+=" A ";
-            
-            this.vehicle.turn(15 );
+            if (this.vehicle.autoPilotEnabled == false)  
+                this.vehicle.turn(15 );
             
             turnLeft = true;
 
@@ -119,7 +130,8 @@ class MyScene extends CGFscene {
 
         if (this.gui.isKeyPressed("KeyD")){
             text+=" D ";
-            this.vehicle.turn(-15);
+            if (this.vehicle.autoPilotEnabled == false)  
+                this.vehicle.turn(-15);
            
             turnRight = true;
 
@@ -153,7 +165,14 @@ class MyScene extends CGFscene {
     // called periodically (as per setUpdatePeriod() in init())
     update(t){
         this.checkKeys();
-        this.vehicle.update();
+        if (this.vehicle.autoPilotEnabled){
+            this.vehicle.autoTurn();
+            this.vehicle.autoUpdate();
+        }
+        else{
+            
+            this.vehicle.update();
+        }
       
         
     }
@@ -222,6 +241,11 @@ class MyScene extends CGFscene {
         }
 
         
+        this.pushMatrix();
+        this.translate(10,0,0);
+        this.rotate(Math.PI/2, 0,1,0);
+        this.deleteLater.display();
+        this.popMatrix();
 
 
         

@@ -29,6 +29,12 @@ class MyVehicle extends CGFobject {
 		this.rotateLemeLeft = false;
 		this.rotateLemeRight = false;
 
+
+		this.autoPilotEnabled = false;
+		this.center_x = 0;
+		this.center_z = 0;
+
+
 		this.initMaterials(this.scene);
 	}
 	enableNormalViz() {
@@ -71,6 +77,7 @@ class MyVehicle extends CGFobject {
 		this.speed = 0;
 		this.initialAngle = 0;
 		this.helixAngle = 0;
+		this.autoPilotEnabled = false;
 	}
 
 	initMaterials(scene){
@@ -98,6 +105,28 @@ class MyVehicle extends CGFobject {
 		
 	}
 
+	enableAutoPilot(){
+		this.autoPilotEnabled = true;
+		this.speed = this.scene.speedFactor * 0.1 * 5;
+		this.center_x = this.x + 5 * Math.cos(this.initialAngle);
+		this.center_z = this.z - 5 * Math.sin(this.initialAngle);
+	}
+
+	autoTurn(){
+		let old_x = this.x; let old_y = this.y;
+		this.x = this.center_x;
+		this.y = 0;
+		this.initialAngle += 6;
+
+		this.x = old_x;
+		this.y = old_y;
+	}
+
+	autoUpdate(){
+		this.x +=  this.speed * Math.sin(this.initialAngle * Math.PI / 180);
+		//console.log(this.x);
+		this.z += this.speed * Math.cos(this.initialAngle * Math.PI / 180);
+	}
 	
 	display(){
 
