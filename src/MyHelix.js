@@ -12,7 +12,7 @@ class MyHelix extends CGFobject{
 		this.x = x;
 		this.y = y;
 		this.z = z;
-		this.angle = 0;
+	
 
 	}
 

@@ -30,7 +30,7 @@ class MyScene extends CGFscene {
         this.cylinder = new MyCylinder(this,50);
         this.sphere = new MySphere(this, 50, 50);
         this.cube = new MyCubeMap(this);
-        this.vehicle = new MyVehicle(this, undefined, 0, 0, 5,0,5);
+        this.vehicle = new MyVehicle(this, undefined, 0, 0, 0,0,10);
         this.quad = new MyQuad(this);
 
         
