@@ -74,15 +74,26 @@ class MyVehicle extends CGFobject {
 	}
 
 	initMaterials(scene){
-		this.materialTangram = new CGFappearance(this.scene);
-        this.materialTangram.setAmbient(0.1, 0.1, 0.1, 1);
-        this.materialTangram.setDiffuse(0.9, 0.9, 0.9, 1);
-        this.materialTangram.setSpecular(0.1, 0.1, 0.1, 1);
-        this.materialTangram.setShininess(10.0);
-        this.texture = new CGFtexture(this.scene, 'images/earth.jpg');
-        this.materialTangram.setTexture(this.texture);
-        this.materialTangram.setTextureWrap('REPEAT', 'REPEAT');
+		this.material = new CGFappearance(this.scene);
+        this.material.setAmbient(0.1, 0.1, 0.1, 1);
+        this.material.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.material.setSpecular(0.1, 0.1, 0.1, 1);
+        this.material.setShininess(10.0);
+        this.texture = new CGFtexture(this.scene, 'images/test.jpg');
+        this.material.setTexture(this.texture);
+        this.material.setTextureWrap('REPEAT', 'REPEAT');
 
+
+		this.black = new CGFappearance(this.scene);
+        this.black.setAmbient(0.1, 0.1, 0.1, 1);
+        this.black.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.black.setSpecular(0.1, 0.1, 0.1, 1);
+        this.black.setShininess(10.0);
+        this.texture = new CGFtexture(this.scene, 'images/black.jpg');
+        this.black.setTexture(this.texture);
+		this.black.setTextureWrap('REPEAT', 'REPEAT');
+		
+		
 		
 		
 	}
@@ -94,7 +105,7 @@ class MyVehicle extends CGFobject {
 		this.scene.pushMatrix();
 		this.scene.scale(1,1,2);
 		
-		this.materialTangram.apply();
+		this.material.apply();
 		this.body.display();
 		this.scene.popMatrix();
 
@@ -127,6 +138,7 @@ class MyVehicle extends CGFobject {
 			this.scene.rotate(this.helixAngle, 0, 0, 1 );
 		this.scene.scale(-0.05,-0.05,-1);
 		//this.scene.scale(0.05,0.05, 1);
+		this.black.apply();
 		this.helix1.display();
 		this.scene.popMatrix();
 		
@@ -138,9 +150,12 @@ class MyVehicle extends CGFobject {
 				this.scene.rotate( this.helixAngle, 0, 0, 1 );
 		this.scene.scale(-0.05,-0.05,-1);
 		//this.scene.scale(0.05,0.05, 1);
+		this.black.apply();
 		this.helix2.display();
 		this.scene.popMatrix();
 
+
+		//Lemes
 		this.scene.pushMatrix();
 		this.scene.translate(0, 0.5, -2.1);
 		if (this.rotateLemeLeft)
@@ -152,6 +167,8 @@ class MyVehicle extends CGFobject {
 		this.scene.scale(0.5,0.5,0.5);
 		this.leme.display();
 		this.scene.popMatrix();
+
+
 
 		this.scene.pushMatrix();
 
@@ -168,7 +185,7 @@ class MyVehicle extends CGFobject {
 
 
 
-		
+
 		this.scene.pushMatrix();
 		this.scene.translate(-0.3, 0, -2.1);
 		
