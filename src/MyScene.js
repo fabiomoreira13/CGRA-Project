@@ -111,6 +111,7 @@ class MyScene extends CGFscene {
 
         if (this.gui.isKeyPressed("KeyP")) {
             text+=" P ";
+            console.log(text);
             if (this.vehicle.autoPilotEnabled == false)  
                 this.vehicle.enableAutoPilot();
             else 
