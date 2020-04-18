@@ -23,6 +23,12 @@ class MyVehicle extends CGFobject {
 		this.helix2 = new MyHelix(this.scene);
 		
 		this.helixAngle = 0;
+
+
+		this.leme = new MyLeme(this.scene);
+		this.rotateLemeLeft = false;
+		this.rotateLemeRight = false;
+
 		this.initMaterials(this.scene);
 	}
 	enableNormalViz() {
@@ -133,6 +139,31 @@ class MyVehicle extends CGFobject {
 		this.scene.scale(-0.05,-0.05,-1);
 		//this.scene.scale(0.05,0.05, 1);
 		this.helix2.display();
+		this.scene.popMatrix();
+
+		this.scene.pushMatrix();
+		this.scene.translate(0, 0.5, -2.1);
+		if (this.rotateLemeLeft)
+			this.scene.rotate(+Math.PI/4, 0,0,1);
+		else if (this.rotateLemeRight)
+			this.scene.rotate(-Math.PI/4, 0,0,1);
+		this.scene.rotate(Math.PI /2, 1,0,0);
+		this.scene.rotate(Math.PI/2, 0,1,0);
+		this.scene.scale(0.5,0.5,0.5);
+		this.leme.display();
+		this.scene.popMatrix();
+
+		this.scene.pushMatrix();
+
+		this.scene.translate(0, -0.5, -2.1);
+		if (this.rotateLemeLeft)
+			this.scene.rotate(Math.PI/4, 0,0,1);
+		else if (this.rotateLemeRight)
+			this.scene.rotate(-Math.PI/4, 0,0,1);
+		this.scene.rotate(Math.PI /2, 1,0,0);
+		this.scene.rotate(Math.PI/2, 0,1,0);
+		this.scene.scale(0.5,0.5,0.5);
+		this.leme.display();
 		this.scene.popMatrix();
 
 		

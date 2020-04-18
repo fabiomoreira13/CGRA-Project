@@ -33,7 +33,6 @@ class MyScene extends CGFscene {
         this.vehicle = new MyVehicle(this, undefined, 0, 0, 0,0,10);
         this.quad = new MyQuad(this);
 
-        this.leme = new MyLeme(this);
         
 
 
@@ -89,13 +88,14 @@ class MyScene extends CGFscene {
 
     checkKeys() {
         var text="Keys pressed: ";
-        var keysPressed=false;
+        var turnRight=false;
+        var turnLeft = false;
         // Check for key codes e.g. in https://keycode.info/
         if (this.gui.isKeyPressed("KeyW")) {
             text+=" W ";
             this.vehicle.accelerate(this.speedFactor * 0.1);
             
-            keysPressed=true;
+            //keysPressed=true;
             //this.vehicle.update();
         }
         if (this.gui.isKeyPressed("KeyS")) {
@@ -103,23 +103,25 @@ class MyScene extends CGFscene {
             this.vehicle.accelerate(this.speedFactor *  -0.1);
             
             //this.vehicle.update();
-            keysPressed=true;
+            //keysPressed=true;
         }
 
         
         if (this.gui.isKeyPressed("KeyA")){
             text+=" A ";
+            
             this.vehicle.turn(15 );
-        
-            keysPressed = true;
+            
+            turnLeft = true;
 
         }
+        //this.vehicle.rotateLeme = false;
 
         if (this.gui.isKeyPressed("KeyD")){
             text+=" D ";
             this.vehicle.turn(-15);
            
-            keysPressed = true;
+            turnRight = true;
 
         }
 
@@ -127,12 +129,22 @@ class MyScene extends CGFscene {
             text+=" R ";
             this.vehicle.reset();
 
-            keysPressed = true;
+            //keysPressed = true;
         }
     
-        if (keysPressed){
-            console.log(text);
+        if (turnLeft){
+            //console.log(text);
+            this.vehicle.rotateLemeLeft = true;
             //this.vehicle.update();
+        }
+        else{
+            this.vehicle.rotateLemeLeft = false;
+        }
+        if (turnRight){
+            this.vehicle.rotateLemeRight = true;
+        }
+        else{
+            this.vehicle.rotateLemeRight = false;
         }
     }
         
@@ -210,7 +222,7 @@ class MyScene extends CGFscene {
         }
 
         
-        this.leme.display();
+
 
         
         // ---- END Primitive drawing section
