@@ -36,7 +36,7 @@ class MyVehicle extends CGFobject {
 		this.z += this.speed * Math.cos(this.initialAngle * Math.PI / 180);
 	
 		if (this.speed != 0){
-			this.helixAngle += 15 * Math.PI / 180;
+			this.helixAngle += this.speed * 3 * 15 * Math.PI / 180;
 			
 		}
 		else{
@@ -131,7 +131,7 @@ class MyVehicle extends CGFobject {
 		this.scene.pushMatrix();
 		this.scene.translate(-0.13,-1.1,-0.85 );
 		//this.scene.translate(-this.x, -this.y, -this.z);
-		this.scene.rotate(this.helixAngle, 0, 0, 1 );
+		this.scene.rotate( this.helixAngle, 0, 0, 1 );
 		this.scene.scale(-0.05,-0.05,-1);
 		//this.scene.scale(0.05,0.05, 1);
 		this.helix2.display();
