@@ -58,6 +58,13 @@ class MyScene extends CGFscene {
 
         this.scaleFactor = 1;
         this.speedFactor = 1;
+
+        this.currentTexture = 0;
+
+        this.textureList= {
+            'Sky': 0,
+            'Forest': 1
+        };
     }
     initLights() {
         this.setGlobalAmbientLight(0.6, 0.6, 0.6, 1.0);
@@ -138,7 +145,9 @@ class MyScene extends CGFscene {
         
     }
 
-
+    selectedTexture() {
+            this.cube.updateTexture();
+    }
 
 
 
