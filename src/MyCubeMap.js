@@ -13,7 +13,7 @@ class MyCubeMap extends CGFobject {
 		this.top.setDiffuse(0.0, 0.0, 0.0, 1);
 		this.top.setSpecular(0.0, 0.0, 0.0, 1);
 		this.top.setShininess(10.0);
-		this.top.loadTexture('images/split_cubemap/top.png');
+		this.top.loadTexture('images/split_cubemap/sky/top.png');
 		this.top.setTextureWrap('REPEAT', 'REPEAT');
 
 		this.left = new CGFappearance(scene);
@@ -21,7 +21,7 @@ class MyCubeMap extends CGFobject {
 		this.left.setDiffuse(0.0, 0.0, 0.0, 1);
 		this.left.setSpecular(0.0, 0.0, 0.0, 1);
 		this.left.setShininess(10.0);
-		this.left.loadTexture('images/split_cubemap/left.png');
+		this.left.loadTexture('images/split_cubemap/sky/left.png');
 		this.left.setTextureWrap('REPEAT', 'REPEAT');
 
 		this.right= new CGFappearance(scene);
@@ -29,7 +29,7 @@ class MyCubeMap extends CGFobject {
 		this.right.setDiffuse(0.0, 0.0, 0.0, 1);
 		this.right.setSpecular(0.0, 0.0, 0.0, 1);
 		this.right.setShininess(10.0);
-		this.right.loadTexture('images/split_cubemap/right.png');
+		this.right.loadTexture('images/split_cubemap/sky/right.png');
 		this.right.setTextureWrap('REPEAT', 'REPEAT');
 
 		this.front = new CGFappearance(scene);
@@ -37,7 +37,7 @@ class MyCubeMap extends CGFobject {
 		this.front.setDiffuse(0.0, 0.0, 0.0, 1);
 		this.front.setSpecular(0.0, 0.0, 0.0, 1);
 		this.front.setShininess(10.0);
-		this.front.loadTexture('images/split_cubemap/front.png');
+		this.front.loadTexture('images/split_cubemap/sky/front.png');
 		this.front.setTextureWrap('REPEAT', 'REPEAT');
 
 		this.bottom = new CGFappearance(scene);
@@ -45,7 +45,7 @@ class MyCubeMap extends CGFobject {
 		this.bottom.setDiffuse(0.0, 0.0, 0.0, 1);
 		this.bottom.setSpecular(0.0, 0.0, 0.0, 1);
 		this.bottom.setShininess(10.0);
-		this.bottom.loadTexture('images/split_cubemap/bottom.png');
+		this.bottom.loadTexture('images/split_cubemap/sky/bottom.png');
 		this.bottom.setTextureWrap('REPEAT', 'REPEAT');
 
 		this.back = new CGFappearance(scene);
@@ -53,7 +53,7 @@ class MyCubeMap extends CGFobject {
 		this.back.setDiffuse(0.0, 0.0, 0.0, 1);
 		this.back.setSpecular(0.0, 0.0, 0.0, 1);
 		this.back.setShininess(10.0);
-		this.back.loadTexture('images/split_cubemap/back.png');
+		this.back.loadTexture('images/split_cubemap/sky/back.png');
 		this.back.setTextureWrap('REPEAT', 'REPEAT');
 
 	}
@@ -130,20 +130,20 @@ class MyCubeMap extends CGFobject {
 
 	updateTexture(){
         if(this.scene.currentTexture==0){
-            this.left.loadTexture('images/split_cubemap/left.png');
-            this.right.loadTexture('images/split_cubemap/right.png');
-            this.back.loadTexture('images/split_cubemap/back.png');
-            this.front.loadTexture('images/split_cubemap/front.png');
-            this.top.loadTexture('images/split_cubemap/top.png');
-            this.bottom.loadTexture('images/split_cubemap/bottom.png');
+            this.left.loadTexture('images/split_cubemap/sky/left.png');
+            this.right.loadTexture('images/split_cubemap/sky/right.png');
+            this.back.loadTexture('images/split_cubemap/sky/back.png');
+            this.front.loadTexture('images/split_cubemap/sky/front.png');
+            this.top.loadTexture('images/split_cubemap/sky/top.png');
+            this.bottom.loadTexture('images/split_cubemap/sky/bottom.png');
         }
         else if(this.scene.currentTexture==1){
-			this.left.loadTexture('images/split_cubemap/left_forest.png');
-            this.right.loadTexture('images/split_cubemap/right_forest.png');
-            this.back.loadTexture('images/split_cubemap/back_forest.png');
-            this.front.loadTexture('images/split_cubemap/front_forest.png');
-            this.top.loadTexture('images/split_cubemap/top_forest.png');
-            this.bottom.loadTexture('images/split_cubemap/bottom_forest.png');
+			this.left.loadTexture('images/split_cubemap/forest/left.png');
+            this.right.loadTexture('images/split_cubemap/forest/right.png');
+            this.back.loadTexture('images/split_cubemap/forest/back.png');
+            this.front.loadTexture('images/split_cubemap/forest/front.png');
+            this.top.loadTexture('images/split_cubemap/forest/top.png');
+            this.bottom.loadTexture('images/split_cubemap/forest/bottom.png');
         }
     }
 
