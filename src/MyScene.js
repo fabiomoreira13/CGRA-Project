@@ -33,6 +33,7 @@ class MyScene extends CGFscene {
         this.vehicle = new MyVehicle(this, undefined, 0, 0, 0,0,10);
         this.quad = new MyQuad(this);
 
+        this.leme = new MyLeme(this);
         
 
 
@@ -146,7 +147,7 @@ class MyScene extends CGFscene {
     }
 
     selectedTexture() {
-            this.cube.updateTexture();
+        this.cube.updateTexture();
     }
 
 
@@ -209,7 +210,7 @@ class MyScene extends CGFscene {
         }
 
         
-        
+        this.leme.display();
 
         
         // ---- END Primitive drawing section

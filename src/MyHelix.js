@@ -4,14 +4,12 @@
  * @param scene - Reference to MyScene object
  */
 class MyHelix extends CGFobject{
-	constructor(scene,x,y,z) {
+	constructor(scene) {
 		super(scene);
 		this.rectangle = new MyDiamond(this.scene);
 
 		this.initMaterials(this.scene);
-		this.x = x;
-		this.y = y;
-		this.z = z;
+		
 	
 
 	}
