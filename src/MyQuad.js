@@ -13,10 +13,10 @@ class MyQuad extends CGFobject {
 
 	initBuffers() {
 		this.vertices = [
-			-25, -25, 0,	//0
-			25, -25, 0,	//1
-			-25, 25, 0,	//2
-			25, 25, 0		//3
+			-50, -50, 0,	//0
+			50, -50, 0,	//1
+			-50, 50, 0,	//2
+			50, 50, 0		//3
 		];
 
 		//Counter-clockwise reference of vertices

@@ -60,6 +60,9 @@ class MyScene extends CGFscene {
         this.speedFactor = 1;
     }
     initLights() {
+        this.setGlobalAmbientLight(0.6, 0.6, 0.6, 1.0);
+
+
         this.lights[0].setPosition(15, 2, 5, 1);
         this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
         this.lights[0].enable();

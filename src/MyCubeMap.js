@@ -64,7 +64,7 @@ class MyCubeMap extends CGFobject {
 
 		// TOP //
 		this.scene.pushMatrix();
-		this.scene.translate(0, 25, 0);
+		this.scene.translate(0, 50, 0);
 		this.scene.rotate(Math.PI / 2, 1, 0, 0);
 		this.top.apply();
 		this.quad.display();
@@ -72,7 +72,7 @@ class MyCubeMap extends CGFobject {
 
 		// BOTTOM //
 		this.scene.pushMatrix();
-		this.scene.translate(0, -25, 0);
+		this.scene.translate(0, -50, 0);
     	this.scene.rotate(-Math.PI / 2, 1, 0, 0);
 		this.bottom.apply();
 		this.quad.display();
@@ -80,7 +80,7 @@ class MyCubeMap extends CGFobject {
 
 		// LEFT //
 		this.scene.pushMatrix();
-		this.scene.translate(-25, 0, 0);
+		this.scene.translate(-50, 0, 0);
 		this.scene.rotate(Math.PI / 2, 0, 1, 0);
 		this.left.apply();
 		this.quad.display();
@@ -88,7 +88,7 @@ class MyCubeMap extends CGFobject {
 
 		// RIGHT //
 		this.scene.pushMatrix();
-		this.scene.translate(25, 0, 0);
+		this.scene.translate(50, 0, 0);
     	this.scene.rotate(-Math.PI / 2, 0, 1, 0);
 		this.right.apply();
 		this.quad.display();
@@ -96,14 +96,14 @@ class MyCubeMap extends CGFobject {
 
 		// FRONT //
 		this.scene.pushMatrix();
-		this.scene.translate(0, 0, -25);
+		this.scene.translate(0, 0, -50);
 		this.front.apply();
 		this.quad.display();
 		this.scene.popMatrix();
 
 		// BACK //
 		this.scene.pushMatrix();
-		this.scene.translate(0,0,25);
+		this.scene.translate(0,0,50);
 		this.scene.rotate(Math.PI, 0, 1, 0);
 		this.back.apply();
 		this.quad.display();
