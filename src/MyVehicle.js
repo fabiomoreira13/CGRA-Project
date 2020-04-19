@@ -54,13 +54,12 @@ class MyVehicle extends CGFobject {
 	}
 
 	turn(val){
-		let old_x = this.x; let old_y = this.y;
+		let old_x = this.x; 
 		this.x = 0;
-		this.y = 0;
+	
 		this.initialAngle += val;
 
 		this.x = old_x;
-		this.y = old_y;
 	}
 
 
@@ -107,19 +106,19 @@ class MyVehicle extends CGFobject {
 
 	enableAutoPilot(){
 		this.autoPilotEnabled = true;
-		this.speed = 0.5;
+		this.speed = 0.52;
 		this.center_x = this.x + 5 * Math.cos(this.initialAngle);
 		this.center_z = this.z - 5 * Math.sin(this.initialAngle);
 	}
 
 	autoTurn(){
-		let old_x = this.x; let old_y = this.y;
+		let old_x = this.x; 
 		this.x = this.center_x;
-		this.y = 0;
+		
 		this.initialAngle += 6;
 
 		this.x = old_x;
-		this.y = old_y;
+	
 	}
 
 	autoUpdate(){
