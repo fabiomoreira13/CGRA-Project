@@ -231,7 +231,7 @@ class MyScene extends CGFscene {
             this.pushMatrix();
             
             this.translate(this.vehicle.x, this.vehicle.y, this.vehicle.z);
-            this.rotate(this.vehicle.initialAngle * Math.PI / 180 , 0,1,0);
+            this.rotate(this.vehicle.angle * Math.PI / 180 , 0,1,0);
             this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
             
             

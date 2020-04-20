@@ -9,7 +9,7 @@ class MyVehicle extends CGFobject {
 		this.initBuffers();
 		if (coords != undefined)
 			this.updateTexCoords(coords);
-		this.initialAngle = angle;
+		this.angle = angle;
 		this.speed = 0;
 		this.x = x;
 		this.y = y;
@@ -43,9 +43,9 @@ class MyVehicle extends CGFobject {
 
 
 	update(){
-		this.x +=  this.speed * Math.sin(this.initialAngle * Math.PI / 180);
+		this.x +=  this.speed * Math.sin(this.angle * Math.PI / 180);
 		//console.log(this.x);
-		this.z += this.speed * Math.cos(this.initialAngle * Math.PI / 180);
+		this.z += this.speed * Math.cos(this.angle * Math.PI / 180);
 	
 		
 		this.helixAngle += this.speed * 3 * 15 * Math.PI / 180;
@@ -54,12 +54,13 @@ class MyVehicle extends CGFobject {
 	}
 
 	turn(val){
-		let old_x = this.x; 
+		let old_x = this.x; let old_z = this.z;
 		this.x = 0;
 	
-		this.initialAngle += val;
+		this.angle += val;
 
 		this.x = old_x;
+		this.z = old_z;
 	}
 
 
@@ -74,7 +75,7 @@ class MyVehicle extends CGFobject {
 		this.y = 0;
 		this.z = 0;
 		this.speed = 0;
-		this.initialAngle = 0;
+		this.angle = 0;
 		this.helixAngle = 0;
 		this.autoPilotEnabled = false;
 	}
@@ -106,27 +107,34 @@ class MyVehicle extends CGFobject {
 
 	enableAutoPilot(){
 		this.autoPilotEnabled = true;
-		this.speed = 0.5;
-		//TODO PUT ANGLE IN RADIANS
-		this.center_x = this.x + 5 * Math.cos(this.initialAngle * Math.PI / 180);
-		this.center_z = this.z - 5 * Math.sin(this.initialAngle * Math.PI / 180);
-		console.log("Center x: ", this.center_x);
-		console.log("Center z: ", this.center_z);
 
-		//Z orientation
-		if (Math.cos(this.initialAngle * Math.PI / 180) >= 0)
-				this.angleWithX = -Math.acos(Math.sin(this.initialAngle * Math.PI / 180) ) * 180 / Math.PI;
-		else
-				this.angleWithX = Math.acos(Math.sin(this.initialAngle * Math.PI / 180) ) * 180 / Math.PI;
-		console.log("Initial angle: ", this.initialAngle);
-		console.log("Sin of initial angle:", Math.sin(this.initialAngle * Math.PI / 180));
-		console.log("Angle with x:" , this.angleWithX);
-		console.log("Orientation x: ", Math.sin(this.initialAngle * Math.PI / 180));
-		console.log("orientation z: ", Math.cos(this.initialAngle * Math.PI / 180))
-		this.initial_X = this.x;
-		this.initial_Z = this.z;
+		//this speed will not affect the actual animation. Will affect the vehicle speed after it leaves auto-pilot
+		this.speed = 0.5;
 	
-		//this.angleWithX = 0;
+		//Determine the center of the animation.
+		//Orientation of the vehicle is given by (sin(this.angle), cos(this.angle))
+		//Center can be obtained by the vector perpendicular to this one, (cos(this.angle), -sin(this.angle));
+		//Multiple the latter vector by 5 to get a radius of 5
+		this.center_x = this.x + 5 * Math.cos(this.angle * Math.PI / 180);
+		this.center_z = this.z - 5 * Math.sin(this.angle * Math.PI / 180);
+		
+
+	
+
+		// Z orientation = Math.cos(this.angle*Math.PI / 180);
+		if (Math.cos(this.angle* Math.PI / 180) >= 0)
+				this.angleWithX = -Math.acos(Math.sin(this.angle * Math.PI / 180) ) * 180 / Math.PI;
+		else
+				this.angleWithX = Math.acos(Math.sin(this.angle * Math.PI / 180) ) * 180 / Math.PI;
+		
+
+		//v1 * v2 = |v1| * |v2| * cos(alfa), where alfa is the angle between v1 and v2.
+		//V1 is the orientation of the vehicle, sin(angle), cos(angle)
+		//V2 is (1,0) -> the orientation of the xx axis
+		//|v1| is 1
+		// |v2| is 1
+	
+		
 		//multiply by 180 / Math.PI to obtain angulo em graus
 
 		
@@ -138,13 +146,15 @@ class MyVehicle extends CGFobject {
 		
 		
 		//This is for the orientation angle
-		//TODO IT should be 3.5 instead of 5, i dont get it
-		this.initialAngle += 2* 180 / (20 * 4.25);
+		//TODO IT should be 20 * 5 ???
+
+		//Orientation angle
+		this.angle += 2* 180 / (20 *3.5 );
 
 
 		// 2 * Math.PI / (ticksPerSecond * time to complete the circle)
-		//This is for the rotation angle
-		this.angleWithX += 2 * 180 / (20 * 4.25);
+		//This is for the rotation angle -> if you want to change the revolution time, change the value that's multiplied by 20
+		this.angleWithX += 2 * 180 / (20 * 3.5);
 		this.x = old_x;
 
 	
