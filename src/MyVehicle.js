@@ -112,11 +112,15 @@ class MyVehicle extends CGFobject {
 		this.center_z = this.z - 5 * Math.sin(this.initialAngle * Math.PI / 180);
 		console.log("Center x: ", this.center_x);
 		console.log("Center z: ", this.center_z);
-		this.angleWithX = -Math.acos(Math.sin(this.initialAngle * Math.PI / 180) ) * 180 / Math.PI;
-		
+
+		//Z orientation
+		if (Math.cos(this.initialAngle * Math.PI / 180) >= 0)
+				this.angleWithX = -Math.acos(Math.sin(this.initialAngle * Math.PI / 180) ) * 180 / Math.PI;
+		else
+				this.angleWithX = Math.acos(Math.sin(this.initialAngle * Math.PI / 180) ) * 180 / Math.PI;
 		console.log("Initial angle: ", this.initialAngle);
 		console.log("Sin of initial angle:", Math.sin(this.initialAngle * Math.PI / 180));
-		console.log("Angle with x:" , this.angleWithX * 180 / Math.PI);
+		console.log("Angle with x:" , this.angleWithX);
 		console.log("Orientation x: ", Math.sin(this.initialAngle * Math.PI / 180));
 		console.log("orientation z: ", Math.cos(this.initialAngle * Math.PI / 180))
 		this.initial_X = this.x;
