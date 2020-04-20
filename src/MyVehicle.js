@@ -110,9 +110,15 @@ class MyVehicle extends CGFobject {
 		//TODO PUT ANGLE IN RADIANS
 		this.center_x = this.x + 5 * Math.cos(this.initialAngle * Math.PI / 180);
 		this.center_z = this.z - 5 * Math.sin(this.initialAngle * Math.PI / 180);
+		console.log("Center x: ", this.center_x);
+		console.log("Center z: ", this.center_z);
+		this.angleWithX = -Math.acos(Math.sin(this.initialAngle * Math.PI / 180) ) * 180 / Math.PI;
 		
-		this.angleWithX = -Math.acos(Math.sin(this.initialAngle)) * 180 / Math.PI;
-
+		console.log("Initial angle: ", this.initialAngle);
+		console.log("Sin of initial angle:", Math.sin(this.initialAngle * Math.PI / 180));
+		console.log("Angle with x:" , this.angleWithX * 180 / Math.PI);
+		console.log("Orientation x: ", Math.sin(this.initialAngle * Math.PI / 180));
+		console.log("orientation z: ", Math.cos(this.initialAngle * Math.PI / 180))
 		this.initial_X = this.x;
 		this.initial_Z = this.z;
 	
@@ -129,19 +135,20 @@ class MyVehicle extends CGFobject {
 		
 		//This is for the orientation angle
 		//TODO IT should be 3.5 instead of 5, i dont get it
-		this.initialAngle += 2* 180 / (20 * 3.5);
+		this.initialAngle += 2* 180 / (20 * 4.25);
 
 
 		// 2 * Math.PI / (ticksPerSecond * time to complete the circle)
 		//This is for the rotation angle
-		this.angleWithX += 2 * 180 / (20 * 3.5);
+		this.angleWithX += 2 * 180 / (20 * 4.25);
 		this.x = old_x;
 
 	
 	}
 
 	autoUpdate(){
-		this.x =   this.center_x + (5 * Math.sin(this.angleWithX * Math.PI / 180)) ;
+		
+		this.x = this.center_x + (5 * Math.sin((this.angleWithX ) * Math.PI / 180)) ;
 		//console.log(this.x);
 		this.z = this.center_z  + (5 * Math.cos(this.angleWithX * Math.PI / 180)) ;
 		

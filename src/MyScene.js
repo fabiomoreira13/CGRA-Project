@@ -252,7 +252,19 @@ class MyScene extends CGFscene {
         this.deleteLater.display();
         this.popMatrix();
 
+        this.pushMatrix();
+        this.translate(5,0,5);
+        
+        this.deleteLater.display();
+        this.popMatrix();
 
+
+        
+        this.pushMatrix();
+        this.translate(5,0,-5);
+        
+        this.deleteLater.display();
+        this.popMatrix();
         
         // ---- END Primitive drawing section
     }
