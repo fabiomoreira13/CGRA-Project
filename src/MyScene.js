@@ -33,8 +33,9 @@ class MyScene extends CGFscene {
         this.vehicle = new MyVehicle(this, undefined, 0, 0, 0,0,10);
         this.quad = new MyQuad(this);
 
-        this.supply = new MySupply(this);
+        //this.supply = new MySupply(this);
 
+        this.supplies = new Array(new MySupply(this), new MySupply(this), new MySupply(this), new MySupply(this), new MySupply(this));
         
         //Material & Texture
         this.material = new CGFappearance(this);
@@ -60,6 +61,8 @@ class MyScene extends CGFscene {
         this.speedFactor = 1;
 
         this.currentTexture = 0;
+
+        this.currentSupply = 0;
 
         this.textureList= {
             'Sky': 0,
@@ -146,12 +149,23 @@ class MyScene extends CGFscene {
         if (this.gui.isKeyPressed("KeyR")){
             text+=" R ";
             this.vehicle.reset();
-            this.supply.reset();
+            for (let i = 0; i < 5; i++){
+
+            
+                this.supplies[i].reset();
+            }
             //keysPressed = true;
         }
         
         if (this.gui.isKeyPressed("KeyT")){
-            this.supply.drop();
+            for (let i = 0; i<5; i++){
+                if (this.supplies[i].state == this.supplies[i].SupplyStates.INACTIVE){
+                    this.supplies[i].drop();
+                    this.currentSupply++;
+                    break;
+                }
+            }
+            
         }
     
         if (turnLeft){
@@ -184,10 +198,12 @@ class MyScene extends CGFscene {
             this.vehicle.update();
         }
 
-        if (this.supply.state == this.supply.SupplyStates.FALLING){
-            this.supply.update();
-            if (this.supply.y <= -9){
-                this.supply.land();
+        for (let i = 0; i < 5; i++){
+            if (this.supplies[i].state == this.supplies[0].SupplyStates.FALLING) {
+                this.supplies[i].update();
+                if (this.supplies[i].y <= -9) {
+                    this.supplies[i].land();
+                }
             }
         }
       
@@ -257,17 +273,18 @@ class MyScene extends CGFscene {
             this.cube.display();
         }
 
-        
-        this.pushMatrix();
-        if (this.supply.state == this.supply.SupplyStates.INACTIVE){
-            this.translate(this.vehicle.x, this.vehicle.y, this.vehicle.z);
+        for (let i = 0; i < 5; i++){
+            this.pushMatrix();
+            if (this.supplies[i].state == this.supplies[0].SupplyStates.INACTIVE) {
+                this.translate(this.vehicle.x, this.vehicle.y, this.vehicle.z);
+            }
+            else {
+                this.translate(this.supplies[i].initialX, this.supplies[i].y, this.supplies[i].initialZ);
+            }
+            this.scale(0.1, 0.1, 0.1);
+            this.supplies[i].display();
+            this.popMatrix();
         }
-        else {
-            this.translate(this.supply.initialX,this.supply.y,this.supply.initialZ);
-        }
-        this.scale(0.1,0.1,0.1);
-        this.supply.display();
-        this.popMatrix();
 
         // ---- END Primitive drawing section
     }
