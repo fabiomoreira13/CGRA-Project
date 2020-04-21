@@ -149,6 +149,10 @@ class MyScene extends CGFscene {
 
             //keysPressed = true;
         }
+        
+        if (this.gui.isKeyPressed("KeyT")){
+            this.supply.drop();
+        }
     
         if (turnLeft){
             //console.log(text);
@@ -178,6 +182,13 @@ class MyScene extends CGFscene {
         else{
             
             this.vehicle.update();
+        }
+
+        if (this.supply.state == this.supply.SupplyStates.FALLING){
+            this.supply.update();
+            if (this.supply.y <= -9){
+                this.supply.land();
+            }
         }
       
         
@@ -248,7 +259,12 @@ class MyScene extends CGFscene {
 
         
         this.pushMatrix();
-        this.translate(0,-1.5,0);
+        if (this.supply.state == this.supply.SupplyStates.INACTIVE){
+            this.translate(this.vehicle.x, this.vehicle.y, this.vehicle.z);
+        }
+        else {
+            this.translate(this.supply.initialX,this.supply.y,this.supply.initialZ);
+        }
         this.scale(0.1,0.1,0.1);
         this.supply.display();
         this.popMatrix();

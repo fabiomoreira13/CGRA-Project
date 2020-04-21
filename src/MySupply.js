@@ -29,7 +29,22 @@ class MySupply extends CGFobject{
 		LANDED: 2
 		};
 		
-	
+	drop(){
+		if (this.state == this.SupplyStates.INACTIVE){
+			this.initialX = this.scene.vehicle.x;
+			this.initialZ = this.scene.vehicle.z;
+			
+			this.state = this.SupplyStates.FALLING;
+			
+		}
+		
+	}
+
+	land(){
+		if (this.state == this.SupplyStates.FALLING){
+			this.state = this.SupplyStates.LANDED;
+		}
+	}
 	initMaterials(scene){
 		this.materialSideCube= new CGFappearance(this.scene);
         this.materialSideCube.setAmbient(0.9, 0.9, 0.9, 1);
@@ -45,12 +60,17 @@ class MySupply extends CGFobject{
 		
 	}
 
+	//TODO CHECK MOVEMENTS EQUATIONS
 	update(){
-
+		
+		this.y -= 0.5;
+		
 	}
 
 	display(){
-		if (this.state != this.SupplyStates.LANDED){
+
+		//TODO CHANGE THIS TO == FALLING, so that it doesnt draw it inside the blimp when its inactive
+		if (this.state == this.SupplyStates.FALLING || this.state == this.SupplyStates.INACTIVE){
 			//First square
 			this.scene.pushMatrix();
 			this.scene.translate(0, 0, 1);
