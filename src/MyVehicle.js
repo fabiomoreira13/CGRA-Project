@@ -55,7 +55,7 @@ class MyVehicle extends CGFobject {
 
 	turn(val){
 		let old_x = this.x; let old_z = this.z;
-		this.x = 0;
+		this.x = 0; this.z = 0;
 	
 		this.angle += val;
 
@@ -143,6 +143,7 @@ class MyVehicle extends CGFobject {
 	autoTurn(){
 		let old_x = this.x; let old_z = this.z;
 		this.x = this.center_x;
+		this.z = this.center_z;
 		
 		
 		//This is for the orientation angle
@@ -156,6 +157,7 @@ class MyVehicle extends CGFobject {
 		//This is for the rotation angle -> if you want to change the revolution time, change the value that's multiplied by 20
 		this.angleWithX += 2 * 180 / (20 * 3.5);
 		this.x = old_x;
+		this.z = old_z;
 
 	
 	}
