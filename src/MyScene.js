@@ -35,7 +35,7 @@ class MyScene extends CGFscene {
 
         
 
-        this.deleteLater = new MyLeme(this);
+        
         //Material & Texture
         this.material = new CGFappearance(this);
         this.material.setAmbient(0.5,0.5,0.5,1);
@@ -91,19 +91,19 @@ class MyScene extends CGFscene {
         var turnRight=false;
         var turnLeft = false;
         // Check for key codes e.g. in https://keycode.info/
-        if (this.gui.isKeyPressed("KeyW")) {
+        if (this.gui.isKeyPressed("KeyW") && !this.vehicle.autoPilotEnabled)  {
             text+=" W ";
-            if (this.vehicle.autoPilotEnabled == false)            
-                this.vehicle.accelerate(this.speedFactor * 0.1);
+                  
+            this.vehicle.accelerate(this.speedFactor * 0.1);
 
             
             //keysPressed=true;
             //this.vehicle.update();
         }
-        if (this.gui.isKeyPressed("KeyS")) {
+        if (this.gui.isKeyPressed("KeyS") && !this.vehicle.autoPilotEnabled) {
             text+=" S ";
-            if (this.vehicle.autoPilotEnabled == false)  
-                this.vehicle.accelerate(this.speedFactor *  -0.1);
+              
+            this.vehicle.accelerate(this.speedFactor *  -0.1);
             
             //this.vehicle.update();
             //keysPressed=true;
@@ -114,6 +114,7 @@ class MyScene extends CGFscene {
             console.log(text);
             if (this.vehicle.autoPilotEnabled == false)  {
                 this.vehicle.enableAutoPilot();
+               
   
             }
             else {
@@ -125,20 +126,18 @@ class MyScene extends CGFscene {
             //keysPressed=true;
         }
         
-        if (this.gui.isKeyPressed("KeyA")){
+        if (this.gui.isKeyPressed("KeyA") && !this.vehicle.autoPilotEnabled){
             text+=" A ";
-            if (this.vehicle.autoPilotEnabled == false)  
-                this.vehicle.turn(15 );
+            this.vehicle.turn(15 );
             
             turnLeft = true;
 
         }
         //this.vehicle.rotateLeme = false;
 
-        if (this.gui.isKeyPressed("KeyD")){
+        if (this.gui.isKeyPressed("KeyD") && !this.vehicle.autoPilotEnabled){
             text+=" D ";
-            if (this.vehicle.autoPilotEnabled == false)  
-                this.vehicle.turn(-15);
+           this.vehicle.turn(-15);
            
             turnRight = true;
 
@@ -249,27 +248,6 @@ class MyScene extends CGFscene {
 
         
 
-        //TODO DELETE THIS WHEN AUTO PILOT IS WORKING FINE. THIS IS HERE TO CHECK DIAMETER OF THE CURVE
-        this.pushMatrix();
-        this.translate(10,0,0);
-        this.rotate(Math.PI/2, 0,1,0);
-        this.deleteLater.display();
-        this.popMatrix();
-
-        this.pushMatrix();
-        this.translate(5,0,5);
-        
-        this.deleteLater.display();
-        this.popMatrix();
-
-
-        
-        this.pushMatrix();
-        this.translate(5,0,-5);
-        
-        this.deleteLater.display();
-        this.popMatrix();
-        
         // ---- END Primitive drawing section
     }
 }

@@ -107,7 +107,7 @@ class MyVehicle extends CGFobject {
 
 	enableAutoPilot(){
 		this.autoPilotEnabled = true;
-
+		
 		//this speed will not affect the actual animation. Will affect the vehicle speed after it leaves auto-pilot
 		this.speed = 0.5;
 	
@@ -218,7 +218,7 @@ class MyVehicle extends CGFobject {
 		this.scene.translate(-0.13,-1.1,-0.85 );
 		//this.scene.translate(-this.x, -this.y, -this.z);
 		if (this.speed != 0)
-				this.scene.rotate( this.helixAngle, 0, 0, 1 );
+			this.scene.rotate( this.helixAngle, 0, 0, 1 );
 		this.scene.scale(-0.05,-0.05,-1);
 		//this.scene.scale(0.05,0.05, 1);
 		this.black.apply();
@@ -229,10 +229,14 @@ class MyVehicle extends CGFobject {
 		//Lemes
 		this.scene.pushMatrix();
 		this.scene.translate(0, 0.5, -2.1);
-		if (this.rotateLemeLeft)
+		if (this.autoPilotEnabled)
 			this.scene.rotate(+Math.PI/4, 0,0,1);
-		else if (this.rotateLemeRight)
-			this.scene.rotate(-Math.PI/4, 0,0,1);
+		else{
+			if (this.rotateLemeLeft)
+				this.scene.rotate(+Math.PI/4, 0,0,1);
+			else if (this.rotateLemeRight)
+				this.scene.rotate(-Math.PI/4, 0,0,1);
+		}
 		this.scene.rotate(Math.PI /2, 1,0,0);
 		this.scene.rotate(Math.PI/2, 0,1,0);
 		this.scene.scale(0.5,0.5,0.5);
@@ -244,10 +248,14 @@ class MyVehicle extends CGFobject {
 		this.scene.pushMatrix();
 
 		this.scene.translate(0, -0.5, -2.1);
-		if (this.rotateLemeLeft)
-			this.scene.rotate(Math.PI/4, 0,0,1);
-		else if (this.rotateLemeRight)
-			this.scene.rotate(-Math.PI/4, 0,0,1);
+		if (this.autoPilotEnabled)
+			this.scene.rotate(+Math.PI/4, 0,0,1);
+		else{
+			if (this.rotateLemeLeft)
+				this.scene.rotate(+Math.PI/4, 0,0,1);
+			else if (this.rotateLemeRight)
+				this.scene.rotate(-Math.PI/4, 0,0,1);
+		}
 		this.scene.rotate(Math.PI /2, 1,0,0);
 		this.scene.rotate(Math.PI/2, 0,1,0);
 		this.scene.scale(0.5,0.5,0.5);
