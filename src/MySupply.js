@@ -68,7 +68,7 @@ class MySupply extends CGFobject{
 	//TODO CHECK MOVEMENTS EQUATIONS
 	update(){
 		
-		this.y -= 0.5;
+		this.y -= 1.5
 		
 	}
 

@@ -62,7 +62,7 @@ class MyScene extends CGFscene {
 
         this.currentTexture = 0;
 
-        this.currentSupply = 0;
+        this.nSuppliesDelivered = 0;
 
         this.textureList= {
             'Sky': 0,
@@ -154,14 +154,15 @@ class MyScene extends CGFscene {
             
                 this.supplies[i].reset();
             }
+            this.nSuppliesDelivered = 0;
             //keysPressed = true;
         }
         
-        if (this.gui.isKeyPressed("KeyT")){
+        if (this.gui.isKeyPressed("KeyL")){
             for (let i = 0; i<5; i++){
                 if (this.supplies[i].state == this.supplies[i].SupplyStates.INACTIVE){
                     this.supplies[i].drop();
-                    this.currentSupply++;
+                    this.nSuppliesDelivered++;
                     break;
                 }
             }
@@ -201,7 +202,7 @@ class MyScene extends CGFscene {
         for (let i = 0; i < 5; i++){
             if (this.supplies[i].state == this.supplies[0].SupplyStates.FALLING) {
                 this.supplies[i].update();
-                if (this.supplies[i].y <= -9) {
+                if (this.supplies[i].y <= -49.5) {
                     this.supplies[i].land();
                 }
             }
