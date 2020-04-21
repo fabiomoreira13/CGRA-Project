@@ -33,7 +33,7 @@ class MyScene extends CGFscene {
         this.vehicle = new MyVehicle(this, undefined, 0, 0, 0,0,10);
         this.quad = new MyQuad(this);
 
-        
+        this.supply = new MySupply(this);
 
         
         //Material & Texture
@@ -247,6 +247,11 @@ class MyScene extends CGFscene {
         }
 
         
+        this.pushMatrix();
+        this.translate(0,-1.5,0);
+        this.scale(0.1,0.1,0.1);
+        this.supply.display();
+        this.popMatrix();
 
         // ---- END Primitive drawing section
     }
