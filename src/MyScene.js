@@ -146,7 +146,7 @@ class MyScene extends CGFscene {
         if (this.gui.isKeyPressed("KeyR")){
             text+=" R ";
             this.vehicle.reset();
-
+            this.supply.reset();
             //keysPressed = true;
         }
         

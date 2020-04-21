@@ -40,6 +40,11 @@ class MySupply extends CGFobject{
 		
 	}
 
+	reset(){
+		this.state = this.SupplyStates.INACTIVE;
+		this.y = 0;
+	}
+
 	land(){
 		if (this.state == this.SupplyStates.FALLING){
 			this.state = this.SupplyStates.LANDED;
