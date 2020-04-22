@@ -282,7 +282,8 @@ class MyScene extends CGFscene {
             else {
                 this.translate(this.supplies[i].initialX, this.supplies[i].y, this.supplies[i].initialZ);
             }
-            this.scale(0.1, 0.1, 0.1);
+            //TODO CHECK IF THIS IS NEEDED
+            this.scale(this.scaleFactor * 0.1, this.scaleFactor * 0.1, this.scaleFactor * 0.1);
             this.supplies[i].display();
             this.popMatrix();
         }

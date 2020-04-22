@@ -65,7 +65,7 @@ class MySupply extends CGFobject{
 		
 	}
 
-	//TODO CHECK MOVEMENTS EQUATIONS
+	
 	update(){
 		
 		this.y -= 1.5
@@ -74,7 +74,7 @@ class MySupply extends CGFobject{
 
 	display(){
 
-		//TODO CHANGE THIS TO == FALLING, so that it doesnt draw it inside the blimp when its inactive
+		
 		if (this.state == this.SupplyStates.FALLING || this.state == this.SupplyStates.INACTIVE){
 			//First square
 			this.scene.pushMatrix();
