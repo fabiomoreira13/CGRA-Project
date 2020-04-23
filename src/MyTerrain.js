@@ -29,7 +29,7 @@ class MyTerrain extends CGFobject {
 			//Shader
 			this.shader = new CGFshader(this.scene.gl, "shaders/terrain.vert", "shaders/terrain.frag");
 			this.shader.setUniformsValues({uSampler2: 1});
-			this.shader.setUniformsValues({normScale: 1});
+			this.shader.setUniformsValues({normScale: 8});
 
 		}
 
@@ -40,7 +40,7 @@ class MyTerrain extends CGFobject {
 				this.scene.pushMatrix();
 				this.terrainmap.bind(1);
 				this.scene.pushMatrix();
-				this.scene.translate(0, -25, 0);
+				this.scene.translate(0, -49.5, 0);
 				this.scene.scale(50, 50, 50);
 				this.scene.rotate(-Math.PI/2, 1, 0, 0);
 				this.plane.display();
