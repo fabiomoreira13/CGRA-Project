@@ -39,6 +39,7 @@ class MyTerrain extends CGFobject {
 				this.scene.setActiveShader(this.shader);
 				this.scene.pushMatrix();
 				this.terrainmap.bind(1);
+				this.scene.pushMatrix();
 				this.scene.translate(0, -25, 0);
 				this.scene.scale(50, 50, 50);
 				this.scene.rotate(-Math.PI/2, 1, 0, 0);
