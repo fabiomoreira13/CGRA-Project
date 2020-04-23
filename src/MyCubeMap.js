@@ -14,7 +14,7 @@ class MyCubeMap extends CGFobject {
 	initMaterials(scene){
 
 		this.material = new CGFappearance(scene);
-		this.material.setAmbient(1.0, 1.0, 1.0, 1);
+		this.material.setAmbient(1.0, 1.0, 1.0, 0.0);
 		this.material.setDiffuse(0.0, 0.0, 0.0, 1);
 		this.material.setSpecular(0.0, 0.0, 0.0, 1);
 		this.material.setShininess(10.0);
