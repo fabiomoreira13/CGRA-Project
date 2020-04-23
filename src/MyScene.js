@@ -189,6 +189,12 @@ class MyScene extends CGFscene {
 
     // called periodically (as per setUpdatePeriod() in init())
     update(t){
+
+        if (this.lastUpdate == 0){
+            this.lastUpdate = t;
+        }
+        this.elapsedTime = t - this.lastUpdate;
+        this.lastUpdate = t;
         this.checkKeys();
         if (this.vehicle.autoPilotEnabled){
             this.vehicle.autoTurn();
@@ -199,6 +205,7 @@ class MyScene extends CGFscene {
             this.vehicle.update();
         }
 
+        //TODO Maybe the .land part should be done outside of update
         for (let i = 0; i < 5; i++){
             if (this.supplies[i].state == this.supplies[0].SupplyStates.FALLING) {
                 this.supplies[i].update();

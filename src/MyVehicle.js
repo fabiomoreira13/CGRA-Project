@@ -150,18 +150,33 @@ class MyVehicle extends CGFobject {
 		//TODO IT should be 20 * 5 ???
 
 		//Orientation angle
-		this.angle += 2* 180 / (20 *3.5 );
+
+
+		/*	Regra de 3 simples para calculo da variacao do angulo
+			Se fosse update a cada 50 ms:
+
+			360 / (20 frames /segundo * 5 segundos) = 360 /100 = 3.6
+			50 		- 		3.6 graus
+			t 		- 		x
+
+			x = 3.6 * t /50;
+
+
+		*/
+
+
+		this.angle += 3.6 * this.scene.elapsedTime / 50;
 
 
 		// 2 * Math.PI / (ticksPerSecond * time to complete the circle)
 		//This is for the rotation angle -> if you want to change the revolution time, change the value that's multiplied by 20
-		this.angleWithX += 2 * 180 / (20 * 3.5);
+		this.angleWithX += 3.6 * this.scene.elapsedTime / 50;
 		this.x = old_x;
 		this.z = old_z;
 
 	
 	}
-
+	//If you want to change the radius, substitute 5 by the desired radius
 	autoUpdate(){
 		
 		this.x = this.center_x + (5 * Math.sin((this.angleWithX ) * Math.PI / 180)) ;
