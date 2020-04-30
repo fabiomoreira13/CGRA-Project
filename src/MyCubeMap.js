@@ -14,7 +14,7 @@ class MyCubeMap extends CGFobject {
 		this.top.setSpecular(0.0, 0.0, 0.0, 1);
 		this.top.setShininess(10.0);
 		this.top.loadTexture('images/split_cubemap/sky/top.png');
-		this.top.setTextureWrap('REPEAT', 'REPEAT');
+		this.top.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
 
 		this.left = new CGFappearance(scene);
 		this.left.setAmbient(1.0, 1.0, 1.0, 1);
@@ -22,7 +22,7 @@ class MyCubeMap extends CGFobject {
 		this.left.setSpecular(0.0, 0.0, 0.0, 1);
 		this.left.setShininess(10.0);
 		this.left.loadTexture('images/split_cubemap/sky/left.png');
-		this.left.setTextureWrap('REPEAT', 'REPEAT');
+		this.left.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
 
 		this.right= new CGFappearance(scene);
 		this.right.setAmbient(1.0, 1.0, 1.0, 1);
@@ -30,7 +30,7 @@ class MyCubeMap extends CGFobject {
 		this.right.setSpecular(0.0, 0.0, 0.0, 1);
 		this.right.setShininess(10.0);
 		this.right.loadTexture('images/split_cubemap/sky/right.png');
-		this.right.setTextureWrap('REPEAT', 'REPEAT');
+		this.right.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
 
 		this.front = new CGFappearance(scene);
 		this.front.setAmbient(1.0, 1.0, 1.0, 1);
@@ -38,7 +38,7 @@ class MyCubeMap extends CGFobject {
 		this.front.setSpecular(0.0, 0.0, 0.0, 1);
 		this.front.setShininess(10.0);
 		this.front.loadTexture('images/split_cubemap/sky/front.png');
-		this.front.setTextureWrap('REPEAT', 'REPEAT');
+		this.front.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
 
 		this.bottom = new CGFappearance(scene);
 		this.bottom.setAmbient(1.0, 1.0, 1.0, 1);
@@ -46,7 +46,7 @@ class MyCubeMap extends CGFobject {
 		this.bottom.setSpecular(0.0, 0.0, 0.0, 1);
 		this.bottom.setShininess(10.0);
 		this.bottom.loadTexture('images/split_cubemap/sky/bottom.png');
-		this.bottom.setTextureWrap('REPEAT', 'REPEAT');
+		this.bottom.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
 
 		this.back = new CGFappearance(scene);
 		this.back.setAmbient(1.0, 1.0, 1.0, 1);
@@ -54,7 +54,7 @@ class MyCubeMap extends CGFobject {
 		this.back.setSpecular(0.0, 0.0, 0.0, 1);
 		this.back.setShininess(10.0);
 		this.back.loadTexture('images/split_cubemap/sky/back.png');
-		this.back.setTextureWrap('REPEAT', 'REPEAT');
+		this.back.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
 
 	}
 
