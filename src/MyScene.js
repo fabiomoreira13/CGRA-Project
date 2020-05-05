@@ -33,6 +33,9 @@ class MyScene extends CGFscene {
         this.vehicle = new MyVehicle(this, undefined, 0, 0, 0,0,10);
         this.quad = new MyQuad(this);
 
+        this.alreadyPressedL = false;
+        this.cooldownIsOver = true;
+        this.cooldownTime = 0;
         //this.supply = new MySupply(this);
 
         this.supplies = new Array(new MySupply(this), new MySupply(this), new MySupply(this), new MySupply(this), new MySupply(this));
@@ -158,11 +161,13 @@ class MyScene extends CGFscene {
             //keysPressed = true;
         }
         
-        if (this.gui.isKeyPressed("KeyL")){
+        if (this.gui.isKeyPressed("KeyL") && this.cooldownIsOver){
+            this.cooldownIsOver = false;
             for (let i = 0; i<5; i++){
                 if (this.supplies[i].state == this.supplies[i].SupplyStates.INACTIVE){
                     this.supplies[i].drop();
                     this.nSuppliesDelivered++;
+
                     break;
                 }
             }
@@ -194,6 +199,13 @@ class MyScene extends CGFscene {
             this.lastUpdate = t;
         }
         this.elapsedTime = t - this.lastUpdate;
+        if (!this.cooldownIsOver){
+            this.cooldownTime+= this.elapsedTime;
+            if (this.cooldownTime > 1000){
+                this.cooldownIsOver = true;
+                this.cooldownTime = 0;
+            }
+        }
         this.lastUpdate = t;
         this.checkKeys();
         if (this.vehicle.autoPilotEnabled){
