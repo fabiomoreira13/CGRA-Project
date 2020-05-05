@@ -161,6 +161,12 @@ class MyScene extends CGFscene {
             //keysPressed = true;
         }
         
+        /*
+            Added cooldown time for the supply drop. When 'L' is pressed, one supply will be released and countdown will begin.
+            When 1 second passes, cooldown will be over and another supply will be available to drop!
+
+        */
+
         if (this.gui.isKeyPressed("KeyL") && this.cooldownIsOver){
             this.cooldownIsOver = false;
             for (let i = 0; i<5; i++){
