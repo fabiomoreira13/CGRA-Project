@@ -32,6 +32,11 @@ class MyScene extends CGFscene {
         this.cube = new MyCubeMap(this);
         this.vehicle = new MyVehicle(this, undefined, 0, 0, 0,0,10);
         this.quad = new MyQuad(this);
+        
+        this.billboard = new MyBillboard(this);
+
+
+        //Utils vars
 
         this.alreadyPressedL = false;
         this.cooldownIsOver = true;
@@ -312,6 +317,8 @@ class MyScene extends CGFscene {
             this.supplies[i].display();
             this.popMatrix();
         }
+
+        this.billboard.display();
 
         // ---- END Primitive drawing section
     }
