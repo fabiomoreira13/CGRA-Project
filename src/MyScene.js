@@ -157,6 +157,7 @@ class MyScene extends CGFscene {
         if (this.gui.isKeyPressed("KeyR")){
             text+=" R ";
             this.vehicle.reset();
+            this.billboard.reset();
             for (let i = 0; i < 5; i++){
 
             
@@ -174,9 +175,11 @@ class MyScene extends CGFscene {
 
         if (this.gui.isKeyPressed("KeyL") && this.cooldownIsOver){
             this.cooldownIsOver = false;
+            
             for (let i = 0; i<5; i++){
                 if (this.supplies[i].state == this.supplies[i].SupplyStates.INACTIVE){
                     this.supplies[i].drop();
+                    this.billboard.update();
                     this.nSuppliesDelivered++;
 
                     break;

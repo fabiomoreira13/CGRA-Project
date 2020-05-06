@@ -7,14 +7,30 @@ class MyBillboard extends CGFobject{
 	constructor(scene) {
 		super(scene);
 		this.rectangle = new MyQuad(this.scene);
+        
+        this.progressbar = new MyPlane(this.scene, 50);
 
-		this.initMaterials(this.scene);
-		
+        this.progressShader = new CGFshader(scene.gl, 'shaders/blueYellow.vert', 'shaders/blueYellow.frag');
+
+        
+        this.initMaterials(this.scene);
+        this.dropped = 0;
+        this.progressShader.setUniformsValues({offset: -0.6});
+        //Set dropped supplies to 0
 	
 
 	}
 
 
+    update(){
+        this.dropped++;
+        this.progressShader.setUniformsValues({offset: -0.6+0.24*this.dropped});
+    }
+
+    reset(){
+        this.dropped = 0;
+        this.progressShader.setUniformsValues({offset: -0.6});
+    }
 
 	initMaterials(scene){
 		this.message= new CGFappearance(this.scene);
@@ -53,6 +69,15 @@ class MyBillboard extends CGFobject{
         this.scene.popMatrix();
 
         
+        this.scene.setActiveShader(this.progressShader);
+        this.scene.pushMatrix();
+        this.scene.translate(0, -0.3, 0.01);
+        this.scene.scale(1.5, 0.2, 1);
+        this.progressbar.display();
+        this.scene.popMatrix();
+        this.scene.setActiveShader(this.scene.defaultShader);
+
+      
 		
 
 	}
