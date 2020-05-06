@@ -7,6 +7,8 @@ class MyTerrain extends CGFobject {
 
         this.plane = new MyPlane(scene, 20);
 
+				this.terrainHeight = 1;
+
 				this.init(scene);
 
     }
@@ -29,8 +31,12 @@ class MyTerrain extends CGFobject {
 			//Shader
 			this.shader = new CGFshader(this.scene.gl, "shaders/terrain.vert", "shaders/terrain.frag");
 			this.shader.setUniformsValues({uSampler2: 1});
-			this.shader.setUniformsValues({normScale: 8});
+			this.shader.setUniformsValues({normScale: this.terrainHeight});
 
+		}
+
+		onTerrainHeightChanged(v){
+			this.shader.setUniformsValues({normScale: this.terrainHeight});
 		}
 
     display(){

@@ -60,6 +60,7 @@ class MyScene extends CGFscene {
 
         this.scaleFactor = 1;
         this.speedFactor = 1;
+        this.terrainHeight = 1;
 
         this.currentTexture = 0;
 
