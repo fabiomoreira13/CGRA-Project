@@ -63,6 +63,7 @@ class MyScene extends CGFscene {
         this.displaySphere = false;
         this.displayVehicle = true;
         this.displayCube = false;
+        this.displayBillboard = true;
 
 
         this.scaleFactor = 1;
@@ -321,7 +322,13 @@ class MyScene extends CGFscene {
             this.popMatrix();
         }
 
-        this.billboard.display();
+        if (this.displayBillboard){
+            this.pushMatrix();
+            //this.translate(-40,-49,-40);
+            //this.scale(5,5,5);
+            this.billboard.display();
+            this.popMatrix();
+        }
 
         // ---- END Primitive drawing section
     }
