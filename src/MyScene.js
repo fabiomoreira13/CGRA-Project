@@ -32,8 +32,16 @@ class MyScene extends CGFscene {
         this.cube = new MyCubeMap(this);
         this.vehicle = new MyVehicle(this, undefined, 0, 0, 0,0,10);
         this.quad = new MyQuad(this);
-        this.terrain = new MyTerrain(this, 50, 50, 8);
+        this.terrain = new MyTerrain(this);
 
+        this.billboard = new MyBillboard(this);
+
+
+        //Utils vars
+
+        this.alreadyPressedL = false;
+        this.cooldownIsOver = true;
+        this.cooldownTime = 0;
         //this.supply = new MySupply(this);
 
         this.supplies = new Array(new MySupply(this), new MySupply(this), new MySupply(this), new MySupply(this), new MySupply(this));
@@ -60,7 +68,8 @@ class MyScene extends CGFscene {
 
         this.scaleFactor = 1;
         this.speedFactor = 1;
-        this.terrainHeight = 1;
+
+        this.terrainY = 0;
 
         this.currentTexture = 0;
 
@@ -151,6 +160,7 @@ class MyScene extends CGFscene {
         if (this.gui.isKeyPressed("KeyR")){
             text+=" R ";
             this.vehicle.reset();
+            this.billboard.reset();
             for (let i = 0; i < 5; i++){
 
 
@@ -160,11 +170,21 @@ class MyScene extends CGFscene {
             //keysPressed = true;
         }
 
-        if (this.gui.isKeyPressed("KeyL")){
+        /*
+            Added cooldown time for the supply drop. When 'L' is pressed, one supply will be released and countdown will begin.
+            When 1 second passes, cooldown will be over and another supply will be available to drop!
+
+        */
+
+        if (this.gui.isKeyPressed("KeyL") && this.cooldownIsOver){
+            this.cooldownIsOver = false;
+
             for (let i = 0; i<5; i++){
                 if (this.supplies[i].state == this.supplies[i].SupplyStates.INACTIVE){
                     this.supplies[i].drop();
+                    this.billboard.update();
                     this.nSuppliesDelivered++;
+
                     break;
                 }
             }
@@ -191,6 +211,19 @@ class MyScene extends CGFscene {
 
     // called periodically (as per setUpdatePeriod() in init())
     update(t){
+
+        if (this.lastUpdate == 0){
+            this.lastUpdate = t;
+        }
+        this.elapsedTime = t - this.lastUpdate;
+        if (!this.cooldownIsOver){
+            this.cooldownTime+= this.elapsedTime;
+            if (this.cooldownTime > 1000){
+                this.cooldownIsOver = true;
+                this.cooldownTime = 0;
+            }
+        }
+        this.lastUpdate = t;
         this.checkKeys();
         if (this.vehicle.autoPilotEnabled){
             this.vehicle.autoTurn();
@@ -198,9 +231,10 @@ class MyScene extends CGFscene {
         }
         else{
 
-            this.vehicle.update();
+            this.vehicle.update(this.elapsedTime);
         }
 
+        //TODO Maybe the .land part should be done outside of update
         for (let i = 0; i < 5; i++){
             if (this.supplies[i].state == this.supplies[0].SupplyStates.FALLING) {
                 this.supplies[i].update();
@@ -244,7 +278,7 @@ class MyScene extends CGFscene {
 
         //this.cube.display();
 
-        this.terrain.display();
+
 
         if (this.displayCylinder){
             //this.material.apply();
@@ -256,6 +290,8 @@ class MyScene extends CGFscene {
 
           this.sphere.display();
         }
+
+
 
 
         if (this.displayVehicle){
@@ -291,6 +327,13 @@ class MyScene extends CGFscene {
             this.supplies[i].display();
             this.popMatrix();
         }
+
+        this.billboard.display();
+
+        this.pushMatrix();
+        this.translate(0, this.terrainY, 0);
+        this.terrain.display();
+        this.popMatrix();
 
         // ---- END Primitive drawing section
     }

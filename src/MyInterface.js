@@ -55,10 +55,12 @@ class MyInterface extends CGFinterface {
 
         this.gui.add(this.scene, 'currentTexture', this.scene.textureList).name('Selected Texture').onChange(this.scene.selectedTexture.bind(this.scene));
 
+        this.gui.add(this.scene, 'currentTexture', this.scene.textureList).name('Selected Texture').onChange(this.scene.selectedTexture.bind(this.scene));
+
         this.gui.add(this.scene, 'speedFactor', 0.1, 3).name('Speed Factor');
         this.gui.add(this.scene, 'scaleFactor', 0.5, 3).name('Scale Factor');
-        this.gui.add(this.scene, 'terrainHeight',0,8).onChange(this.scene.onTerrainHeightChanged.bind(this.scene));
 
+        this.gui.add(this.scene, 'terrainY', -3, 3).name('Terrain Dis');
         this.initKeys();
         return true;
     }

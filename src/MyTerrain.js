@@ -7,9 +7,9 @@ class MyTerrain extends CGFobject {
 
         this.plane = new MyPlane(scene, 20);
 
-				this.terrainHeight = 1;
+				this.terrainHeight = 8;
 
-				this.init(scene);
+				this.init(this.scene);
 
     }
 
@@ -35,23 +35,19 @@ class MyTerrain extends CGFobject {
 
 		}
 
-		onTerrainHeightChanged(v){
-			this.shader.setUniformsValues({normScale: this.terrainHeight});
-		}
 
     display(){
 
 				this.appearance.apply();
 				this.scene.setActiveShader(this.shader);
-				this.scene.pushMatrix();
 				this.terrainmap.bind(1);
 				this.scene.pushMatrix();
-				this.scene.translate(0, -49.5, 0);
-				this.scene.scale(50, 50, 50);
+				this.scene.translate(0, -25, 0);
+				this.scene.scale(50, 1, 50);
 				this.scene.rotate(-Math.PI/2, 1, 0, 0);
 				this.plane.display();
 				this.scene.popMatrix();
 
-				//this.scene.setActiveShader(this.defaultShader);
+				this.scene.setActiveShader(this.defaultShader);
     }
 }

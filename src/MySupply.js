@@ -48,6 +48,7 @@ class MySupply extends CGFobject{
 	land(){
 		if (this.state == this.SupplyStates.FALLING){
 			this.state = this.SupplyStates.LANDED;
+			this.y = -49.9;
 		}
 	}
 	initMaterials(scene){
@@ -68,7 +69,25 @@ class MySupply extends CGFobject{
 	
 	update(){
 		
-		this.y -= 1.5
+
+
+		/*
+			Again, regra de 3 simples
+
+			Num cenário perfeito, um update seria a cada 50ms, resultando em 20 atualizacoes por segundo, 60 atualizacoes no total.
+
+			Assim, 
+				50 ms 			- 			50 metros / 60 atualizacoes
+				t				-	 				x 
+
+				x = (50/60) * t / 50
+
+			However, se o y do supply for 0, o seu y_real será -0.5, devido ao tamanho unitario do Supply. Therefore, a distância real que irá ter
+			de percorrer é 49.5 m.
+
+			
+		 */ 
+		this.y -= (49.5/60) * this.scene.elapsedTime / 50;
 		
 	}
 

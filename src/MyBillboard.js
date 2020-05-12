@@ -1,0 +1,89 @@
+/**
+ * MyHelix
+ * @constructor
+ * @param scene - Reference to MyScene object
+ */
+class MyBillboard extends CGFobject{
+	constructor(scene) {
+		super(scene);
+		this.rectangle = new MyQuad(this.scene);
+        
+        this.progressbar = new MyPlane(this.scene, 50);
+
+        this.progressShader = new CGFshader(scene.gl, 'shaders/blueYellow.vert', 'shaders/blueYellow.frag');
+
+        
+        this.initMaterials(this.scene);
+        this.dropped = 0;
+        this.progressShader.setUniformsValues({offset: -0.6});
+        //Set dropped supplies to 0
+	
+
+	}
+
+
+    update(){
+        this.dropped++;
+        this.progressShader.setUniformsValues({offset: -0.6+0.24*this.dropped});
+    }
+
+    reset(){
+        this.dropped = 0;
+        this.progressShader.setUniformsValues({offset: -0.6});
+    }
+
+	initMaterials(scene){
+		this.message= new CGFappearance(this.scene);
+        this.message.setAmbient(0.9, 0.9, 0.9, 1);
+        this.message.setDiffuse(0.1, 0.1, 0.1, 1);
+        this.message.setSpecular(0.1, 0.1, 0.1, 1);
+        this.message.setShininess(10.0);
+        this.texture = new CGFtexture(this.scene, 'images/Supplies.png');
+        this.message.setTexture(this.texture);
+        this.message.setTextureWrap('REPEAT', 'REPEAT');
+
+
+        
+		
+		
+	}
+
+
+	display(){
+		this.scene.pushMatrix();
+        this.scene.scale(1,0.5,1);
+        this.message.apply();
+        this.rectangle.display();
+        this.scene.popMatrix();
+        
+        this.scene.pushMatrix();
+        this.scene.translate(-0.95,-1,0);
+        this.scene.scale(0.05,0.5,1);
+        this.rectangle.display();
+        this.scene.popMatrix();
+
+        this.scene.pushMatrix();
+        this.scene.translate(0.95,-1,0);
+        this.scene.scale(0.05,0.5,1);
+        this.rectangle.display();
+        this.scene.popMatrix();
+
+        
+        this.scene.setActiveShader(this.progressShader);
+        this.scene.pushMatrix();
+        this.scene.translate(0, -0.3, 0.01);
+        this.scene.scale(1.5, 0.2, 1);
+        this.progressbar.display();
+        this.scene.popMatrix();
+        this.scene.setActiveShader(this.scene.defaultShader);
+
+      
+		
+
+	}
+
+	updateBuffers(){
+	}
+
+	
+}
