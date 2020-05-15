@@ -87,7 +87,7 @@ class MySupply extends CGFobject{
 
 			
 		 */ 
-		this.y -= (49.5/60) * this.scene.elapsedTime / 50;
+		this.y -= (50/60) * this.scene.elapsedTime / 50;
 		
 	}
 

@@ -324,7 +324,7 @@ class MyScene extends CGFscene {
 
         if (this.displayBillboard){
             this.pushMatrix();
-            //this.translate(-40,-49,-40);
+            //this.translate(-40,-49,-45);
             //this.scale(5,5,5);
             this.billboard.display();
             this.popMatrix();

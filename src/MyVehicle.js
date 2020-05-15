@@ -147,7 +147,7 @@ class MyVehicle extends CGFobject {
 		
 		
 		//This is for the orientation angle
-		//TODO IT should be 20 * 5 ???
+	
 
 		//Orientation angle
 
@@ -257,6 +257,7 @@ class MyVehicle extends CGFobject {
 		this.scene.rotate(Math.PI /2, 1,0,0);
 		this.scene.rotate(Math.PI/2, 0,1,0);
 		this.scene.scale(0.5,0.5,0.5);
+		this.material.apply();
 		this.leme.display();
 		this.scene.popMatrix();
 
@@ -276,6 +277,7 @@ class MyVehicle extends CGFobject {
 		this.scene.rotate(Math.PI /2, 1,0,0);
 		this.scene.rotate(Math.PI/2, 0,1,0);
 		this.scene.scale(0.5,0.5,0.5);
+		this.material.apply();
 		this.leme.display();
 		this.scene.popMatrix();
 
@@ -289,6 +291,7 @@ class MyVehicle extends CGFobject {
 		this.scene.rotate(Math.PI /2, 1,0,0);
 		
 		this.scene.scale(0.4,0.4,0.4);
+		this.material.apply();
 		this.leme.display();
 		this.scene.popMatrix();
 
@@ -301,6 +304,7 @@ class MyVehicle extends CGFobject {
 		this.scene.rotate(Math.PI /2, 1,0,0);
 		
 		this.scene.scale(0.4,0.4,0.4);
+		this.material.apply();
 		this.leme.display();
 		this.scene.popMatrix();
 		
