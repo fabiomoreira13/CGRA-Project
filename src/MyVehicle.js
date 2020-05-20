@@ -11,6 +11,7 @@ class MyVehicle extends CGFobject {
 			this.updateTexCoords(coords);
 		this.angle = angle;
 		this.speed = 0;
+		this.time = 0;
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -21,7 +22,7 @@ class MyVehicle extends CGFobject {
 
 		this.helix1 = new MyHelix(this.scene);
 		this.helix2 = new MyHelix(this.scene);
-		
+
 		this.helixAngle = 0;
 
 
@@ -34,6 +35,10 @@ class MyVehicle extends CGFobject {
 		this.center_x = 0;
 		this.center_z = 0;
 
+		this.flag = new MyPlane(this.scene, 20);
+		this.topString = new MyCylinder(this.scene, 50);
+		this.bottomString = new MyCylinder(this.scene, 50);
+
 
 		this.initMaterials(this.scene);
 	}
@@ -42,21 +47,25 @@ class MyVehicle extends CGFobject {
 	};
 
 
-	update(){
+	update(elapsedTime){
 		this.x +=  this.speed * Math.sin(this.angle * Math.PI / 180);
 		//console.log(this.x);
 		this.z += this.speed * Math.cos(this.angle * Math.PI / 180);
-	
-		
+
+
 		this.helixAngle += this.speed * 3 * 15 * Math.PI / 180;
-		
-		
+
+		this.time += elapsedTime;
+		this.flagShader.setUniformsValues({timeFactor: this.time});
+		this.flagShader.setUniformsValues({speed: this.speed});
+
+
 	}
 
 	turn(val){
 		let old_x = this.x; let old_z = this.z;
 		this.x = 0; this.z = 0;
-	
+
 		this.angle += val;
 
 		this.x = old_x;
@@ -65,9 +74,9 @@ class MyVehicle extends CGFobject {
 
 
 	accelerate(val){
-		
+
 		this.speed += val;
-	
+
 	}
 
 	reset(){
@@ -76,6 +85,7 @@ class MyVehicle extends CGFobject {
 		this.z = 0;
 		this.speed = 0;
 		this.angle = 0;
+		this.time = 0;
 		this.helixAngle = 0;
 		this.autoPilotEnabled = false;
 	}
@@ -99,53 +109,66 @@ class MyVehicle extends CGFobject {
         this.texture = new CGFtexture(this.scene, 'images/black.jpg');
         this.black.setTexture(this.texture);
 		this.black.setTextureWrap('REPEAT', 'REPEAT');
-		
-		
-		
-		
+
+		this.flagTexture = new CGFappearance(this.scene);
+		this.flagTexture.setAmbient(0.1, 0.1, 0.1, 1);
+		this.flagTexture.setDiffuse(0.9, 0.9, 0.9, 1);
+		this.flagTexture.setSpecular(0.1, 0.1, 0.1, 1);
+		this.flagTexture.setShininess(10.0);
+		this.flagTexture.loadTexture('images/portugal.jpg');
+		this.flagTexture.setTextureWrap('REPEAT', 'REPEAT');
+
+		this.flagShader = new CGFshader(this.scene.gl, "shaders/flag.vert", "shaders/flag.frag");
+		this.flagShader.setUniformsValues({uSampler: 1})
+    this.flagShader.setUniformsValues({speed: 0});
+    this.flagShader.setUniformsValues({time: this.time});
+
+		this.flagMap = new CGFtexture(this.scene,"images/portugal.jpg");
+
+
 	}
 
 	enableAutoPilot(){
 		this.autoPilotEnabled = true;
-		
+
 		//this speed will not affect the actual animation. Will affect the vehicle speed after it leaves auto-pilot
 		this.speed = 0.5;
-	
+
 		//Determine the center of the animation.
 		//Orientation of the vehicle is given by (sin(this.angle), cos(this.angle))
 		//Center can be obtained by the vector perpendicular to this one, (cos(this.angle), -sin(this.angle));
 		//Multiple the latter vector by 5 to get a radius of 5
 		this.center_x = this.x + 5 * Math.cos(this.angle * Math.PI / 180);
 		this.center_z = this.z - 5 * Math.sin(this.angle * Math.PI / 180);
-		
 
-	
+
+
 
 		// Z orientation = Math.cos(this.angle*Math.PI / 180);
 		if (Math.cos(this.angle* Math.PI / 180) >= 0)
 				this.angleWithX = -Math.acos(Math.sin(this.angle * Math.PI / 180) ) * 180 / Math.PI;
 		else
 				this.angleWithX = Math.acos(Math.sin(this.angle * Math.PI / 180) ) * 180 / Math.PI;
-		
+
 
 		//v1 * v2 = |v1| * |v2| * cos(alfa), where alfa is the angle between v1 and v2.
 		//V1 is the orientation of the vehicle, sin(angle), cos(angle)
 		//V2 is (1,0) -> the orientation of the xx axis
 		//|v1| is 1
 		// |v2| is 1
-	
-		
+
+
 		//multiply by 180 / Math.PI to obtain angulo em graus
 
-		
+
 	}
 
 	autoTurn(){
 		let old_x = this.x; let old_z = this.z;
 		this.x = this.center_x;
 		this.z = this.center_z;
-		
-		
+
+
 		//This is for the orientation angle
 	
 
@@ -174,25 +197,25 @@ class MyVehicle extends CGFobject {
 		this.x = old_x;
 		this.z = old_z;
 
-	
+
 	}
 	//If you want to change the radius, substitute 5 by the desired radius
 	autoUpdate(){
-		
+
 		this.x = this.center_x + (5 * Math.sin((this.angleWithX ) * Math.PI / 180)) ;
 		//console.log(this.x);
 		this.z = this.center_z  + (5 * Math.cos(this.angleWithX * Math.PI / 180)) ;
-		
+
 
 		this.helixAngle += this.speed * 3 * 15 * Math.PI / 180;
 	}
-	
+
 	display(){
 
 		//Body
 		this.scene.pushMatrix();
 		this.scene.scale(1,1,2);
-		
+
 		this.material.apply();
 		this.body.display();
 		this.scene.popMatrix();
@@ -229,7 +252,7 @@ class MyVehicle extends CGFobject {
 		this.black.apply();
 		this.helix1.display();
 		this.scene.popMatrix();
-		
+
 		//Helix 2
 		this.scene.pushMatrix();
 		this.scene.translate(-0.13,-1.1,-0.85 );
@@ -286,10 +309,10 @@ class MyVehicle extends CGFobject {
 
 		this.scene.pushMatrix();
 		this.scene.translate(-0.3, 0, -2.1);
-		
+
 		this.scene.rotate(Math.PI, 0,0,1);
 		this.scene.rotate(Math.PI /2, 1,0,0);
-		
+
 		this.scene.scale(0.4,0.4,0.4);
 		this.material.apply();
 		this.leme.display();
@@ -299,15 +322,55 @@ class MyVehicle extends CGFobject {
 
 		this.scene.pushMatrix();
 		this.scene.translate(0.3, 0, -2.1);
-		
+
 		this.scene.rotate(Math.PI, 0,0,1);
 		this.scene.rotate(Math.PI /2, 1,0,0);
-		
+
 		this.scene.scale(0.4,0.4,0.4);
 		this.material.apply();
 		this.leme.display();
 		this.scene.popMatrix();
-		
+
+
+		// FLAG //
+		this.flagTexture.apply();
+		this.scene.setActiveShader(this.flagShader);
+		this.scene.pushMatrix();
+		this.flagMap.bind(0);
+		this.scene.translate(0, 0, -3.5);
+		this.scene.rotate(Math.PI/2, 0, 1, 0);
+		this.scene.scale(1, 1, 10);
+		this.flag.display();
+		this.scene.popMatrix();
+		this.scene.setActiveShader(this.scene.defaultShader);
+
+		this.scene.setActiveShader(this.flagShader);
+		this.scene.pushMatrix();
+		this.flagMap.bind(0);
+		this.scene.translate(0, 0, -3.5);
+		this.scene.rotate(-Math.PI/2, 0, 1, 0);
+		this.scene.scale(1, 1, 10);
+		this.flag.display();
+		this.scene.popMatrix();
+		this.scene.setActiveShader(this.scene.defaultShader);
+
+		// FLAG STARINGS //
+		this.scene.pushMatrix();
+		this.scene.translate(0, 0.3, -3);
+		this.scene.rotate(Math.PI/2, 1, 0, 0);
+		this.scene.scale(0.01, 1, 0.01);
+		this.topString.display();
+		this.scene.popMatrix();
+
+		this.scene.pushMatrix();
+		this.scene.translate(0, -0.3, -3);
+		this.scene.rotate(Math.PI/2, 1, 0, 0);
+		this.scene.scale(0.01, 1, 0.01);
+		this.bottomString.display();
+		this.scene.popMatrix();
+
+
+
 	}
 
 	updateBuffers(){
@@ -317,7 +380,7 @@ class MyVehicle extends CGFobject {
 		this.body.disableNormalViz();
 	}
 
-	
+
 	updateTexCoords(coords) {
 		this.texCoords = [...coords];
 		this.updateTexCoordsGLBuffers();

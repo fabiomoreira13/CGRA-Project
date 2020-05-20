@@ -29,13 +29,13 @@ class MyInterface extends CGFinterface {
         // called when a key is released, mark it as inactive in the array
         this.activeKeys[event.code]=false;
     };
-    
+
     isKeyPressed(keyCode) {
         // returns true if a key is marked as pressed, false otherwise
         return this.activeKeys[keyCode] || false;
     }
-        
-        
+
+
     init(application) {
         // call CGFinterface init
         super.init(application);
@@ -54,6 +54,10 @@ class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'displayVehicle').name('Display Vehicle');
         this.gui.add(this.scene, 'displayCube').name('Display Cube');   
         this.gui.add(this.scene, 'displayBillboard').name('Display Billboard');
+        
+
+        this.gui.add(this.scene, 'displayTerrain').name('Display Terrain');
+
 
         //Texture selector
         this.gui.add(this.scene, 'currentTexture', this.scene.textureList).name('Selected Texture').onChange(this.scene.selectedTexture.bind(this.scene));
@@ -63,6 +67,7 @@ class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'speedFactor', 0.1, 3).name('Speed Factor');
         this.gui.add(this.scene, 'scaleFactor', 0.5, 3).name('Scale Factor');
 
+        //this.gui.add(this.scene, 'terrainY', -3, 3).name('Terrain Dis');
         this.initKeys();
         return true;
     }

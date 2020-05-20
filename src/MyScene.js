@@ -32,7 +32,8 @@ class MyScene extends CGFscene {
         this.cube = new MyCubeMap(this);
         this.vehicle = new MyVehicle(this, undefined, 0, 0, 0,0,10);
         this.quad = new MyQuad(this);
-        
+        this.terrain = new MyTerrain(this);
+
         this.billboard = new MyBillboard(this);
 
 
@@ -44,7 +45,7 @@ class MyScene extends CGFscene {
         //this.supply = new MySupply(this);
 
         this.supplies = new Array(new MySupply(this), new MySupply(this), new MySupply(this), new MySupply(this), new MySupply(this));
-        
+
         //Material & Texture
         this.material = new CGFappearance(this);
         this.material.setAmbient(0.5,0.5,0.5,1);
@@ -64,10 +65,13 @@ class MyScene extends CGFscene {
         this.displayVehicle = true;
         this.displayCube = false;
         this.displayBillboard = true;
+        this.displayTerrain = false;
 
 
         this.scaleFactor = 1;
         this.speedFactor = 1;
+
+        this.terrainY = 0;
 
         this.currentTexture = 0;
 
@@ -105,18 +109,18 @@ class MyScene extends CGFscene {
         // Check for key codes e.g. in https://keycode.info/
         if (this.gui.isKeyPressed("KeyW") && !this.vehicle.autoPilotEnabled)  {
             text+=" W ";
-                  
+
             this.vehicle.accelerate(this.speedFactor * 0.1);
 
-            
+
             //keysPressed=true;
             //this.vehicle.update();
         }
         if (this.gui.isKeyPressed("KeyS") && !this.vehicle.autoPilotEnabled) {
             text+=" S ";
-              
+
             this.vehicle.accelerate(this.speedFactor *  -0.1);
-            
+
             //this.vehicle.update();
             //keysPressed=true;
         }
@@ -126,22 +130,22 @@ class MyScene extends CGFscene {
             console.log(text);
             if (this.vehicle.autoPilotEnabled == false)  {
                 this.vehicle.enableAutoPilot();
-               
-  
+
+
             }
             else {
                 this.vehicle.autoPilotEnabled = false;
-                
+
             }
-            
+
             //this.vehicle.update();
             //keysPressed=true;
         }
-        
+
         if (this.gui.isKeyPressed("KeyA") && !this.vehicle.autoPilotEnabled){
             text+=" A ";
             this.vehicle.turn(15 );
-            
+
             turnLeft = true;
 
         }
@@ -150,7 +154,7 @@ class MyScene extends CGFscene {
         if (this.gui.isKeyPressed("KeyD") && !this.vehicle.autoPilotEnabled){
             text+=" D ";
            this.vehicle.turn(-15);
-           
+
             turnRight = true;
 
         }
@@ -161,13 +165,13 @@ class MyScene extends CGFscene {
             this.billboard.reset();
             for (let i = 0; i < 5; i++){
 
-            
+
                 this.supplies[i].reset();
             }
             this.nSuppliesDelivered = 0;
             //keysPressed = true;
         }
-        
+
         /*
             Added cooldown time for the supply drop. When 'L' is pressed, one supply will be released and countdown will begin.
             When 1 second passes, cooldown will be over and another supply will be available to drop!
@@ -176,7 +180,7 @@ class MyScene extends CGFscene {
 
         if (this.gui.isKeyPressed("KeyL") && this.cooldownIsOver){
             this.cooldownIsOver = false;
-            
+
             for (let i = 0; i<5; i++){
                 if (this.supplies[i].state == this.supplies[i].SupplyStates.INACTIVE){
                     this.supplies[i].drop();
@@ -186,9 +190,9 @@ class MyScene extends CGFscene {
                     break;
                 }
             }
-            
+
         }
-    
+
         if (turnLeft){
             //console.log(text);
             this.vehicle.rotateLemeLeft = true;
@@ -204,7 +208,7 @@ class MyScene extends CGFscene {
             this.vehicle.rotateLemeRight = false;
         }
     }
-        
+
 
 
     // called periodically (as per setUpdatePeriod() in init())
@@ -228,8 +232,8 @@ class MyScene extends CGFscene {
             this.vehicle.autoUpdate();
         }
         else{
-            
-            this.vehicle.update();
+
+            this.vehicle.update(this.elapsedTime);
         }
 
         //TODO Maybe the .land part should be done outside of update
@@ -241,8 +245,8 @@ class MyScene extends CGFscene {
                 }
             }
         }
-      
-        
+
+
     }
 
     selectedTexture() {
@@ -276,6 +280,8 @@ class MyScene extends CGFscene {
 
         //this.cube.display();
 
+
+
         if (this.displayCylinder){
             //this.material.apply();
             this.cylinder.display();
@@ -283,22 +289,24 @@ class MyScene extends CGFscene {
 
         if (this.displaySphere){
           this.material.apply();
-          
+
           this.sphere.display();
         }
 
 
+
+
         if (this.displayVehicle){
             this.pushMatrix();
-            
+
             this.translate(this.vehicle.x, this.vehicle.y, this.vehicle.z);
             this.rotate(this.vehicle.angle * Math.PI / 180 , 0,1,0);
             this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
-            
-            
-            
+
+
+
             this.vehicle.display();
-            
+
 
             this.popMatrix();
 
@@ -329,6 +337,18 @@ class MyScene extends CGFscene {
             this.billboard.display();
             this.popMatrix();
         }
+
+
+        if (this.displayTerrain){
+            this.pushMatrix();
+            this.translate(0, -49.9, 0);
+            this.scale(50, 1, 50);
+			this.rotate(-Math.PI/2, 1, 0, 0);
+            this.terrain.display();
+
+            this.popMatrix();
+        }
+        
 
         // ---- END Primitive drawing section
     }
