@@ -42,6 +42,14 @@ class MyBillboard extends CGFobject{
         this.message.setTexture(this.texture);
         this.message.setTextureWrap('REPEAT', 'REPEAT');
 
+        this.white = new CGFappearance(this.scene);
+        this.white.setAmbient(0.9, 0.9, 0.9, 1);
+        this.white.setDiffuse(0.1, 0.1, 0.1, 1);
+        this.white.setSpecular(0.1, 0.1, 0.1, 1);
+        this.white.setShininess(10.0);
+        this.texture_white = new CGFtexture(this.scene, 'images/White.png');
+        this.white.setTexture(this.texture_white);
+        this.white.setTextureWrap('REPEAT', 'REPEAT');
 
         
 		
@@ -59,12 +67,14 @@ class MyBillboard extends CGFobject{
         this.scene.pushMatrix();
         this.scene.translate(-0.95,-1,0);
         this.scene.scale(0.05,0.5,1);
+        this.white.apply();
         this.rectangle.display();
         this.scene.popMatrix();
 
         this.scene.pushMatrix();
         this.scene.translate(0.95,-1,0);
         this.scene.scale(0.05,0.5,1);
+        this.white.apply();
         this.rectangle.display();
         this.scene.popMatrix();
 
