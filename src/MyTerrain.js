@@ -37,17 +37,19 @@ class MyTerrain extends CGFobject {
 
 
     display(){
+		
+		this.scene.setActiveShader(this.shader);
 
-				this.appearance.apply();
-				this.scene.setActiveShader(this.shader);
-				this.terrainmap.bind(1);
-				this.scene.pushMatrix();
-				this.scene.translate(0, -25, 0);
-				this.scene.scale(50, 1, 50);
-				this.scene.rotate(-Math.PI/2, 1, 0, 0);
-				this.plane.display();
-				this.scene.popMatrix();
+        this.terraintexture.bind(0);
+		this.terrainmap.bind(1);
 
-				this.scene.setActiveShader(this.defaultShader);
+        this.scene.pushMatrix();
+        
+        //this.scene.translate(0,0,-24.9);
+        this.plane.display();
+
+        this.scene.popMatrix();
+
+		this.scene.setActiveShader(this.scene.defaultShader);
     }
 }
