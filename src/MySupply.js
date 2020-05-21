@@ -48,7 +48,7 @@ class MySupply extends CGFobject{
 	land(){
 		if (this.state == this.SupplyStates.FALLING){
 			this.state = this.SupplyStates.LANDED;
-			this.y = -49.9;
+			this.y = -49.8;
 		}
 	}
 	initMaterials(scene){
@@ -82,8 +82,7 @@ class MySupply extends CGFobject{
 
 				x = (50/60) * t / 50
 
-			However, se o y do supply for 0, o seu y_real será -0.5, devido ao tamanho unitario do Supply. Therefore, a distância real que irá ter
-			de percorrer é 49.5 m.
+			
 
 			
 		 */ 
