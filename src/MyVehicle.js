@@ -266,7 +266,7 @@ class MyVehicle extends CGFobject {
 		this.scene.popMatrix();
 
 
-		//Lemes
+		//Turning Leme
 		this.scene.pushMatrix();
 		this.scene.translate(0, 0.5, -2.1);
 		if (this.autoPilotEnabled)
@@ -285,9 +285,30 @@ class MyVehicle extends CGFobject {
 		this.scene.popMatrix();
 
 
-
+		//Inverted one
 		this.scene.pushMatrix();
+		this.scene.translate(-0.01, 0.5, -2.1);
+		if (this.autoPilotEnabled)
+			this.scene.rotate(+Math.PI/4, 0,0,1);
+		else{
+			if (this.rotateLemeLeft)
+				this.scene.rotate(+Math.PI/4, 0,0,1);
+			else if (this.rotateLemeRight)
+				this.scene.rotate(-Math.PI/4, 0,0,1);
+		}
+		this.scene.rotate(Math.PI /2, 1,0,0);
+		this.scene.rotate(-Math.PI/2, 0,1,0);
+		this.scene.scale(0.5,0.5,0.5);
+		this.material.apply();
+		this.leme.display();
+		this.scene.popMatrix();
 
+
+
+
+
+		//Turning leme
+		this.scene.pushMatrix();
 		this.scene.translate(0, -0.5, -2.1);
 		if (this.autoPilotEnabled)
 			this.scene.rotate(+Math.PI/4, 0,0,1);
@@ -305,31 +326,73 @@ class MyVehicle extends CGFobject {
 		this.scene.popMatrix();
 
 
+		this.scene.pushMatrix();
+		this.scene.translate(-0.01, -0.5, -2.1);
+		if (this.autoPilotEnabled)
+			this.scene.rotate(+Math.PI/4, 0,0,1);
+		else{
+			if (this.rotateLemeLeft)
+				this.scene.rotate(+Math.PI/4, 0,0,1);
+			else if (this.rotateLemeRight)
+				this.scene.rotate(-Math.PI/4, 0,0,1);
+		}
+		this.scene.rotate(Math.PI /2, 1,0,0);
+		this.scene.rotate(-Math.PI/2, 0,1,0);
+		this.scene.scale(0.5,0.5,0.5);
+		this.material.apply();
+		this.leme.display();
+		this.scene.popMatrix();
 
 
+
+
+
+
+
+
+
+
+		//Horizontal Leme and inverted one
 		this.scene.pushMatrix();
 		this.scene.translate(-0.3, 0, -2.1);
-
 		this.scene.rotate(Math.PI, 0,0,1);
 		this.scene.rotate(Math.PI /2, 1,0,0);
-
 		this.scene.scale(0.4,0.4,0.4);
 		this.material.apply();
 		this.leme.display();
 		this.scene.popMatrix();
 
+		this.scene.pushMatrix();
+		this.scene.translate(-0.3, -0.01, -2.1);
+		this.scene.rotate(Math.PI /2, 1,0,0);
+		this.scene.scale(0.4,0.4,0.4);
+		this.material.apply();
+		this.leme.display();
+		this.scene.popMatrix();
+
+
+
+
+
+		//Horizontal Leme and inverted one
+		this.scene.pushMatrix();
+		this.scene.translate(0.3, 0, -2.1);
+		this.scene.rotate(Math.PI, 0,0,1);
+		this.scene.rotate(Math.PI /2, 1,0,0);
+		this.scene.scale(0.4,0.4,0.4);
+		this.material.apply();
+		this.leme.display();
+		this.scene.popMatrix();
 
 
 		this.scene.pushMatrix();
-		this.scene.translate(0.3, 0, -2.1);
-
-		this.scene.rotate(Math.PI, 0,0,1);
+		this.scene.translate(0.3, -0.01, -2.1);
 		this.scene.rotate(Math.PI /2, 1,0,0);
-
 		this.scene.scale(0.4,0.4,0.4);
 		this.material.apply();
 		this.leme.display();
 		this.scene.popMatrix();
+
 
 
 		// FLAG //
