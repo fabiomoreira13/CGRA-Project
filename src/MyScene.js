@@ -218,6 +218,8 @@ class MyScene extends CGFscene {
             this.lastUpdate = t;
         }
         this.elapsedTime = t - this.lastUpdate;
+
+
         if (!this.cooldownIsOver){
             this.cooldownTime+= this.elapsedTime;
             if (this.cooldownTime > 1000){
@@ -334,6 +336,8 @@ class MyScene extends CGFscene {
             this.pushMatrix();
             //this.translate(-40,-49,-45);
             //this.scale(5,5,5);
+            this.translate(-18,-36, -22);
+            this.scale(5,5,5);
             this.billboard.display();
             this.popMatrix();
         }
@@ -343,7 +347,7 @@ class MyScene extends CGFscene {
             this.pushMatrix();
             this.translate(0, -49.9, 0);
             this.scale(2*50, 1, 2*50);
-			this.rotate(-Math.PI/2, 1, 0, 0);
+            this.rotate(-Math.PI/2, 1, 0, 0);
             this.terrain.display();
 
             this.popMatrix();
