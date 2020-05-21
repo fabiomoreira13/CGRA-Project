@@ -92,7 +92,7 @@ class MyScene extends CGFscene {
         this.lights[0].update();
     }
     initCameras() {
-        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
+        this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(40, 35, 40), vec3.fromValues(0, -10, 0));
     }
     setDefaultAppearance() {
         this.setAmbient(1.0, 1.0, 1.0, 1.0);
@@ -342,7 +342,7 @@ class MyScene extends CGFscene {
         if (this.displayTerrain){
             this.pushMatrix();
             this.translate(0, -49.9, 0);
-            this.scale(50, 1, 50);
+            this.scale(2*50, 1, 2*50);
 			this.rotate(-Math.PI/2, 1, 0, 0);
             this.terrain.display();
 
