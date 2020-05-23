@@ -38,11 +38,10 @@ class MyScene extends CGFscene {
 
 
         //Utils vars
-
         this.alreadyPressedL = false;
         this.cooldownIsOver = true;
         this.cooldownTime = 0;
-        //this.supply = new MySupply(this);
+        
 
         this.supplies = new Array(new MySupply(this), new MySupply(this), new MySupply(this), new MySupply(this), new MySupply(this));
 
@@ -59,13 +58,13 @@ class MyScene extends CGFscene {
 
 
         //Display vars
-        this.displayAxis = true;
+        this.displayAxis = false;
         this.displayCylinder = false;
         this.displaySphere = false;
         this.displayVehicle = true;
-        this.displayCube = false;
+        this.displayCube = true;
         this.displayBillboard = true;
-        this.displayTerrain = false;
+        this.displayTerrain = true;
 
 
         this.scaleFactor = 1;
@@ -112,18 +111,13 @@ class MyScene extends CGFscene {
             text+=" W ";
 
             this.vehicle.accelerate(this.speedFactor * 0.1);
-
-
-            //keysPressed=true;
-            //this.vehicle.update();
         }
         if (this.gui.isKeyPressed("KeyS") && !this.vehicle.autoPilotEnabled) {
             text+=" S ";
 
             this.vehicle.accelerate(this.speedFactor *  -0.1);
 
-            //this.vehicle.update();
-            //keysPressed=true;
+           
         }
 
         if (this.gui.isKeyPressed("KeyP")) {
@@ -139,8 +133,7 @@ class MyScene extends CGFscene {
 
             }
 
-            //this.vehicle.update();
-            //keysPressed=true;
+          
         }
 
         if (this.gui.isKeyPressed("KeyA") && !this.vehicle.autoPilotEnabled){
@@ -150,7 +143,7 @@ class MyScene extends CGFscene {
             turnLeft = true;
 
         }
-        //this.vehicle.rotateLeme = false;
+        
 
         if (this.gui.isKeyPressed("KeyD") && !this.vehicle.autoPilotEnabled){
             text+=" D ";
@@ -170,7 +163,7 @@ class MyScene extends CGFscene {
                 this.supplies[i].reset();
             }
             this.nSuppliesDelivered = 0;
-            //keysPressed = true;
+        
         }
 
         /*
@@ -195,9 +188,9 @@ class MyScene extends CGFscene {
         }
 
         if (turnLeft){
-            //console.log(text);
+           
             this.vehicle.rotateLemeLeft = true;
-            //this.vehicle.update();
+            
         }
         else{
             this.vehicle.rotateLemeLeft = false;
@@ -277,16 +270,13 @@ class MyScene extends CGFscene {
 
         // ---- BEGIN Primitive drawing section
 
-        //This sphere does not have defined texture coordinates
-        //this.incompleteSphere.display();
+       
 
-
-        //this.cube.display();
-
+     
 
 
         if (this.displayCylinder){
-            //this.material.apply();
+            this.material.apply();
             this.cylinder.display();
         }
 
@@ -297,20 +287,12 @@ class MyScene extends CGFscene {
         }
 
 
-
-
         if (this.displayVehicle){
             this.pushMatrix();
-
             this.translate(this.vehicle.x, this.vehicle.y, this.vehicle.z);
             this.rotate(this.vehicle.angle * Math.PI / 180 , 0,1,0);
             this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
-
-
-
             this.vehicle.display();
-
-
             this.popMatrix();
 
         }
@@ -327,7 +309,7 @@ class MyScene extends CGFscene {
             else {
                 this.translate(this.supplies[i].initialX, this.supplies[i].y, this.supplies[i].initialZ);
             }
-            //TODO CHECK IF THIS IS NEEDED
+            //Scale factor will also affect the supplies
             this.scale(this.scaleFactor * 0.1, this.scaleFactor * 0.1, this.scaleFactor * 0.1);
             this.supplies[i].display();
             this.popMatrix();
@@ -335,9 +317,7 @@ class MyScene extends CGFscene {
 
         if (this.displayBillboard){
             this.pushMatrix();
-            //this.translate(-40,-49,-45);
-            //this.scale(5,5,5);
-            this.translate(-18,-36, -22);
+            this.translate(-18,-36, -23);
             this.scale(5,5,5);
             this.billboard.display();
             this.popMatrix();
@@ -350,7 +330,6 @@ class MyScene extends CGFscene {
             this.scale(2*50, 1, 2*50);
             this.rotate(-Math.PI/2, 1, 0, 0);
             this.terrain.display();
-
             this.popMatrix();
         }
         

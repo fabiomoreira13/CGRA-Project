@@ -83,33 +83,6 @@ class MyCylinder extends CGFobject {
       
     }
 
-    //Vertices list FOR A PENTAGON BASE
-    /*
-    i = 0
-    bottom vertice                                  0
-    top vertice vertically above the previous one   1
-
-    i= 1
-    bottom vertice                                  2
-    top vertice vertically above the previous one   3
-
-    i=2
-    bottom vertice                                  4
-    top vertice vertically above the previous one   5
-
-    i=3
-    bottom vertice                                  6
-    top vertice vertically above the previous one   7
-
-    i=4
-    bottom vertice                                  8
-    top vertice vertically above the previous one   9
-
-
-
-
-
-    */
     
 
   

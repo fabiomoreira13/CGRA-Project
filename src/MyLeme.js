@@ -7,11 +7,7 @@ class MyLeme extends CGFobject{
 	constructor(scene,x,y,z) {
 		super(scene);
 		this.rectangle = new MyDiamond(this.scene);
-		this.triangle = new MyTriangle(this.scene);
-
-		this.initMaterials(this.scene);
-		
-		
+		this.triangle = new MyTriangle(this.scene);		
 
 	}
 
@@ -19,8 +15,7 @@ class MyLeme extends CGFobject{
 
 	initMaterials(scene){
 		
-
-		
+	
 		
 	}
 

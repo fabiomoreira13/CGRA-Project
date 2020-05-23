@@ -117,21 +117,21 @@ class MyCubeMap extends CGFobject {
 	}
 
 	enableNormalViz(){
-			/*this.top.enableNormalViz();
+			this.top.enableNormalViz();
 			this.bottom.enableNormalViz();
 			this.left.enableNormalViz();
 			this.right.enableNormalViz();
 			this.front.enableNormalViz();
-			this.back.enableNormalViz();*/
+			this.back.enableNormalViz();
 	};
 
 	disableNormalViz(){
-			/*this.top.disableNormalViz();
+			this.top.disableNormalViz();
 			this.bottom.disableNormalViz();
 			this.left.disableNormalViz();
 			this.right.disableNormalViz();
 			this.front.disableNormalViz();
-			this.back.disableNormalViz();*/	
+			this.back.disableNormalViz();
 	};
 
 	updateTexture(){

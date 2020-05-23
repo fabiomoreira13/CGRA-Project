@@ -8,7 +8,7 @@ class MyHelix extends CGFobject{
 		super(scene);
 		this.rectangle = new MyDiamond(this.scene);
 
-		this.initMaterials(this.scene);
+		
 		
 	
 

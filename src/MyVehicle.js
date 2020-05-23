@@ -49,7 +49,7 @@ class MyVehicle extends CGFobject {
 
 	update(elapsedTime){
 		this.x +=  this.speed * Math.sin(this.angle * Math.PI / 180);
-		//console.log(this.x);
+		
 		this.z += this.speed * Math.cos(this.angle * Math.PI / 180);
 
 
@@ -120,8 +120,8 @@ class MyVehicle extends CGFobject {
 
 		this.flagShader = new CGFshader(this.scene.gl, "shaders/flag.vert", "shaders/flag.frag");
 		this.flagShader.setUniformsValues({uSampler: 1})
-    this.flagShader.setUniformsValues({speed: 0});
-    this.flagShader.setUniformsValues({time: this.time});
+    	this.flagShader.setUniformsValues({speed: 0});
+    	this.flagShader.setUniformsValues({time: this.time});
 
 		this.flagMap = new CGFtexture(this.scene,"images/portugal.jpg");
 
@@ -137,7 +137,7 @@ class MyVehicle extends CGFobject {
 		//Determine the center of the animation.
 		//Orientation of the vehicle is given by (sin(this.angle), cos(this.angle))
 		//Center can be obtained by the vector perpendicular to this one, (cos(this.angle), -sin(this.angle));
-		//Multiple the latter vector by 5 to get a radius of 5
+		//Multiple the latter by 5 to get a radius of 5
 		this.center_x = this.x + 5 * Math.cos(this.angle * Math.PI / 180);
 		this.center_z = this.z - 5 * Math.sin(this.angle * Math.PI / 180);
 

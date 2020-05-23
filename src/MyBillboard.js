@@ -16,7 +16,7 @@ class MyBillboard extends CGFobject{
         this.initMaterials(this.scene);
         this.dropped = 0;
         this.progressShader.setUniformsValues({offset: -0.6});
-        //Set dropped supplies to 0
+
 	
 
 	}
