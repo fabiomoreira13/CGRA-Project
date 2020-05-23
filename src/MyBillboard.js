@@ -10,7 +10,7 @@ class MyBillboard extends CGFobject{
         
         this.progressbar = new MyPlane(this.scene, 50);
 
-        this.progressShader = new CGFshader(scene.gl, 'shaders/blueYellow.vert', 'shaders/blueYellow.frag');
+        this.progressShader = new CGFshader(scene.gl, 'shaders/progressBar.vert', 'shaders/progressBar.frag');
 
         
         this.initMaterials(this.scene);
