@@ -56,7 +56,7 @@ class MyVehicle extends CGFobject {
 		this.helixAngle += this.speed * 3 * 15 * Math.PI / 180;
 
 		this.time += elapsedTime;
-		this.flagShader.setUniformsValues({timeFactor: this.time});
+		this.flagShader.setUniformsValues({timeFactor: elapsedTime});
 		this.flagShader.setUniformsValues({speed: this.speed});
 
 
@@ -82,7 +82,7 @@ class MyVehicle extends CGFobject {
 	reset(){
 		this.x = 0;
 		this.y = 0;
-		this.z = 0;
+		this.z = 10;
 		this.speed = 0;
 		this.angle = 0;
 		this.time = 0;
@@ -325,7 +325,7 @@ class MyVehicle extends CGFobject {
 		this.leme.display();
 		this.scene.popMatrix();
 
-
+		//Inverted one
 		this.scene.pushMatrix();
 		this.scene.translate(-0.01, -0.5, -2.1);
 		if (this.autoPilotEnabled)
@@ -403,6 +403,7 @@ class MyVehicle extends CGFobject {
 		this.scene.translate(0, 0, -3.5);
 		this.scene.rotate(Math.PI/2, 0, 1, 0);
 		this.scene.scale(1, 1, 10);
+		this.flagShader.setUniformsValues({inverted: 0});
 		this.flag.display();
 		this.scene.popMatrix();
 		this.scene.setActiveShader(this.scene.defaultShader);
@@ -413,11 +414,12 @@ class MyVehicle extends CGFobject {
 		this.scene.translate(0, 0, -3.5);
 		this.scene.rotate(-Math.PI/2, 0, 1, 0);
 		this.scene.scale(1, 1, 10);
+		this.flagShader.setUniformsValues({inverted: 1});
 		this.flag.display();
 		this.scene.popMatrix();
 		this.scene.setActiveShader(this.scene.defaultShader);
 
-		// FLAG STARINGS //
+		// FLAG STRINGS //
 		this.scene.pushMatrix();
 		this.scene.translate(0, 0.3, -3);
 		this.scene.rotate(Math.PI/2, 1, 0, 0);

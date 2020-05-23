@@ -12,15 +12,21 @@ varying vec2 vTextureCoord;
 
 uniform float time;
 uniform float speed;
+uniform int inverted;
 
 void main() {
-	vec3 offset=vec3(0.0,0.0,0.0);
+	
 
 	vTextureCoord = aTextureCoord;
 
-	float height = 0.01 * sin(aVertexPosition.x * 30.0);
+    vec3 offset = vec3(0.0, 0.0, 0.0);
 
-  offset.z = height * sin( (speed*5.0) * (timeFactor * 0.003));
+    if(inverted == 0 && aVertexPosition.x > -0.45) 
+        offset.z = -cos((-aVertexPosition.x + timeFactor/10.0 * (0.05 + speed * 0.10)) * 15.0) * 0.01;
+	else if (inverted == 1 && aVertexPosition.x < 0.45)
+		offset.z = cos((aVertexPosition.x + timeFactor/10.0 * (0.05 + speed * 0.10)) * 15.0) * 0.01;
 
-  gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition + offset, 1.0);
+	gl_Position = uPMatrix * uMVMatrix * vec4(aVertexPosition + offset, 1.0);
+
+
 }
