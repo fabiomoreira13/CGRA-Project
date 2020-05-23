@@ -18,6 +18,7 @@ class MyBillboard extends CGFobject{
         this.progressShader.setUniformsValues({offset: -0.6});
 
 	
+		
 
 	}
 
