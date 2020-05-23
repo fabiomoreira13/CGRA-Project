@@ -311,7 +311,8 @@ class MyScene extends CGFscene {
             }
             //Scale factor will also affect the supplies
             this.scale(this.scaleFactor * 0.1, this.scaleFactor * 0.1, this.scaleFactor * 0.1);
-            this.supplies[i].display();
+            if (this.displayVehicle)
+                this.supplies[i].display();
             this.popMatrix();
         }
 
