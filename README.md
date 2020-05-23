@@ -8,4 +8,4 @@
 
 [src/](https://github.com/fabiomoreira13/CGRA-Project/tree/master/src)
   
-[slib/](https://github.com/fabiomoreira13/CGRA-Project/tree/master/lib)
+[lib/](https://github.com/fabiomoreira13/CGRA-Project/tree/master/lib)
