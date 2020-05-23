@@ -23,7 +23,7 @@ class MyTerrain extends CGFobject {
 
 			//Texture
 			this.terraintexture = new CGFtexture(this.scene, "images/terrain.jpg");
-			this.terrainmap = new CGFtexture(this.scene, "images/abc.jpg");
+			this.terrainmap = new CGFtexture(this.scene, "images/new_heightmap.jpg");
 
 			this.appearance.setTexture(this.terraintexture);
 			this.appearance.setTextureWrap('REPEAT', 'REPEAT');
